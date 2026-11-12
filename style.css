@@ -98,7 +98,7 @@ body {
   font-family: "PingFang SC", "Noto Sans SC", "Segoe UI", -apple-system, sans-serif;
   /* 全局背景图：深色版。用 multiply 混合压暗花纹，不额外叠任何层 */
   background-color: #575f6b;
-  background-image: url('./images/bg-dark.png');
+  background-image: url('./images/bg-dark.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -380,14 +380,14 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px calc(90px + env(saf
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-image: url("素材/silkroad_hero_whitegold_16x9.png");  /* 浅色：白金 */
+  background-image: url("素材/silkroad_hero_whitegold_16x9.jpg");  /* 浅色：白金 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 /* 深色主题：夜蓝金 */
 [data-theme="dark"] .hero {
-  background-image: url("素材/silkroad_night_2x1.png");
+  background-image: url("素材/silkroad_night_2x1.jpg");
 }
 
 /* 暗色遮罩：压住图片，保证文字清晰 */
@@ -2049,7 +2049,7 @@ body.pd-lock { overflow: hidden; }
    ============================================================ */
 [data-theme="light"] body {
   /* 全局背景图：浅色版 */
-  background: url('./images/bg-light.png') center center / cover no-repeat fixed;
+  background: url('./images/bg-light.jpg') center center / cover no-repeat fixed;
 }
 [data-theme="light"] body::before,
 [data-theme="light"] body::after {
