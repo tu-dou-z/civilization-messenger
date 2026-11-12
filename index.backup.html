@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文明信使 · 中阿数字文化交流平台</title>
+<style>
+/* ============ 主题变量 ============ */
+:root {
+  --gold: #C49B5E;
+  --gold-light: #DFC08C;
+  --gold-dark: #A47E45;
+  --blue: #1A3A5C;
+  --blue-light: #2C5480;
+  --blue-deep: #12283F;
+
+  --bg: #F5F0E6;
+  --bg-alt: #ECE3D2;
+  --text: #1A3A5C;
+  --text-soft: #4A5568;
+  --text-muted: #7A8394;
+
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: rgba(26, 58, 92, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.7);
+
+  --shadow-sm: 0 4px 16px rgba(26,58,92,0.08);
+  --shadow-md: 0 8px 32px rgba(26,58,92,0.14);
+  --shadow-lg: 0 16px 48px rgba(26,58,92,0.20);
+
+  --radius: 20px;
+  --radius-sm: 12px;
+  --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #0E1B2A;
+  --bg-alt: #14263B;
+  --text: #EDE4D3;
+  --text-soft: #C3CAD4;
+  --text-muted: #8A94A3;
+
+  --glass-bg: rgba(28, 48, 74, 0.5);
+  --glass-border: rgba(196, 155, 94, 0.25);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  --card-bg: rgba(20, 38, 59, 0.65);
+
+  --shadow-sm: 0 4px 16px rgba(0,0,0,0.35);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.45);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.55);
+}
+
+/* ============ 基础 ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "PingFang SC", "Noto Sans SC", "Segoe UI", -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+/* 背景装饰 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(196,155,94,0.22), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(26,58,92,0.18), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(196,155,94,0.14), transparent 55%);
+  transition: opacity var(--transition);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(45deg, var(--gold) 0 2px, transparent 2px 22px),
+    repeating-linear-gradient(-45deg, var(--blue) 0 2px, transparent 2px 22px);
+  pointer-events: none;
+}
+
+[dir="rtl"] { font-family: "Noto Naskh Arabic", "PingFang SC", "Segoe UI", sans-serif; }
+
+/* ============ 导航栏 ============ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+}
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.logo .crescent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 14px rgba(196,155,94,0.5);
+  animation: float 4s ease-in-out infinite;
+}
+.logo .brand-txt {
+  background: linear-gradient(120deg, var(--blue), var(--gold-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[data-theme="dark"] .logo .brand-txt {
+  background: linear-gradient(120deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold);
+}
+.icon-btn {
+  width: 42px; height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.icon-btn:hover { transform: translateY(-2px) rotate(8deg); box-shadow: var(--shadow-md); border-color: var(--gold); }
+
+/* ============ 布局 ============ */
+main { max-width: 1200px; margin: 0 auto; padding: 40px 24px calc(90px + env(safe-area-inset-bottom)); }
+
+/* 多页面切换 */
+.page { display: none; }
+.page.active { display: block; animation: pageIn 0.5s cubic-bezier(0.16,1,0.3,1); }
+@keyframes pageIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+/* 滑动方向进入动画 */
+.page.active.from-right { animation: slideFromRight 0.4s cubic-bezier(0.16,1,0.3,1); }
+.page.active.from-left { animation: slideFromLeft 0.4s cubic-bezier(0.16,1,0.3,1); }
+@keyframes slideFromRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideFromLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+
+/* 页内区块间距（原 section 间距在此保留） */
+.upload-block, .narrative-block, .qa-block, .corridor-block,
+.recommend-block, .profile-head, .history-block, .settings-block { margin-bottom: 28px; }
+.narrative-block:not(.show) { display: none; }
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+}
+.section-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 22px; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 30px 0 44px;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  background: linear-gradient(120deg, var(--blue), var(--gold), var(--blue-light));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
+[data-theme="dark"] .hero h1 {
+  background: linear-gradient(120deg, var(--gold-light), var(--gold), #fff);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
+.hero p { color: var(--text-soft); font-size: 1.1rem; max-width: 640px; margin: 0 auto; }
+
+/* 玻璃卡片通用 */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============ 上传区 ============ */
+.upload-block { padding: 32px; margin-bottom: 40px; }
+.dropzone {
+  border: 2.5px dashed var(--gold);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  background: linear-gradient(135deg, rgba(196,155,94,0.06), rgba(26,58,92,0.04));
+  position: relative;
+  overflow: hidden;
+}
+.dropzone:hover, .dropzone.dragover {
+  border-color: var(--blue-light);
+  background: linear-gradient(135deg, rgba(196,155,94,0.14), rgba(26,58,92,0.1));
+  transform: scale(1.01);
+}
+.dropzone .up-icon {
+  font-size: 3rem;
+  margin-bottom: 14px;
+  display: inline-block;
+  animation: float 3.5s ease-in-out infinite;
+}
+.dropzone h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.dropzone p { color: var(--text-muted); font-size: 0.92rem; }
+.dropzone .formats {
+  margin-top: 16px;
+  display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+}
+.tag {
+  font-size: 0.75rem; padding: 3px 12px; border-radius: 999px;
+  background: rgba(196,155,94,0.18); color: var(--gold-dark); font-weight: 600;
+}
+[data-theme="dark"] .tag { color: var(--gold-light); }
+
+/* 加载动画 */
+.loading-box { text-align: center; padding: 40px 20px; display: none; }
+.loading-box.show { display: block; animation: fadeIn 0.4s ease; }
+.scanner {
+  width: 120px; height: 120px; margin: 0 auto 20px;
+  border-radius: var(--radius-sm);
+  position: relative; overflow: hidden;
+  background: var(--bg-alt);
+  box-shadow: var(--shadow-md);
+}
+.scanner img { width: 100%; height: 100%; object-fit: cover; }
+.scanner .scan-line {
+  position: absolute; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 12px var(--gold);
+  animation: scan 1.6s ease-in-out infinite;
+}
+.spinner {
+  width: 44px; height: 44px; margin: 0 auto 16px;
+  border: 4px solid rgba(196,155,94,0.25);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+.loading-box p { color: var(--text-soft); font-weight: 600; }
+.loading-steps { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; min-height: 20px; }
+
+/* 识别结果 */
+.result-box { display: none; margin-top: 28px; }
+.result-box.show { display: block; animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1); }
+.result-head {
+  display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+  padding: 24px; border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(26,58,92,0.9), rgba(26,58,92,0.7));
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .result-head { background: linear-gradient(135deg, rgba(196,155,94,0.22), rgba(20,38,59,0.9)); }
+.result-thumb {
+  width: 100px; height: 100px; border-radius: var(--radius-sm);
+  object-fit: cover; border: 3px solid var(--gold);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); flex-shrink: 0;
+}
+.result-info { flex: 1; min-width: 200px; }
+.result-info .label { font-size: 0.8rem; opacity: 0.8; letter-spacing: 1px; text-transform: uppercase; }
+.result-info h2 { font-size: 1.8rem; margin: 4px 0 12px; }
+.result-info h2 .ar-name { display: block; font-size: 1rem; opacity: 0.75; font-weight: 400; margin-top: 2px; }
+.confidence { display: flex; align-items: center; gap: 12px; }
+.conf-bar {
+  flex: 1; height: 10px; border-radius: 999px;
+  background: rgba(255,255,255,0.2); overflow: hidden; max-width: 260px;
+}
+.conf-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+  border-radius: 999px; transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+.conf-num { font-weight: 700; font-size: 1.1rem; }
+
+.reset-btn {
+  margin-top: 20px; display: inline-flex; align-items: center; gap: 6px;
+}
+
+/* ============ AI 叙事区 ============ */
+.narrative-block { padding: 32px; margin-bottom: 40px; display: none; }
+.narrative-block.show { display: block; animation: fadeIn 0.6s ease; }
+.narrative-content { display: grid; gap: 20px; margin-top: 8px; }
+.story-card {
+  padding: 22px 24px; border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--gold);
+  transition: var(--transition);
+}
+.story-card:hover { transform: translateX(6px); box-shadow: var(--shadow-md); }
+[dir="rtl"] .story-card { border-left: none; border-right: 4px solid var(--gold); }
+[dir="rtl"] .story-card:hover { transform: translateX(-6px); }
+.story-card h4 {
+  font-size: 1.1rem; margin-bottom: 8px; color: var(--gold-dark);
+  display: flex; align-items: center; gap: 8px;
+}
+[data-theme="dark"] .story-card h4 { color: var(--gold-light); }
+.story-card p { color: var(--text-soft); font-size: 0.98rem; }
+.story-featured {
+  border-left-width: 5px;
+  background: linear-gradient(135deg, rgba(196,155,94,0.14), var(--card-bg));
+}
+[dir="rtl"] .story-featured { border-left-width: 1px; border-right-width: 5px; }
+.story-sign {
+  display: inline-block; margin-top: 4px;
+  color: var(--gold-dark); font-weight: 700; font-style: italic;
+}
+[data-theme="dark"] .story-sign { color: var(--gold-light); }
+
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.72rem; padding: 4px 10px; border-radius: 999px;
+  background: linear-gradient(120deg, var(--gold), var(--gold-dark));
+  color: #fff; font-weight: 700; letter-spacing: 0.5px;
+}
+
+/* ============ 问答区 ============ */
+.qa-block { padding: 32px; margin-bottom: 40px; }
+.chat-window {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  min-height: 220px; max-height: 420px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+  margin-bottom: 16px;
+}
+.chat-window::-webkit-scrollbar { width: 8px; }
+.chat-window::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 8px; }
+.msg { max-width: 78%; padding: 12px 16px; border-radius: 16px; font-size: 0.95rem; animation: msgIn 0.4s ease; line-height: 1.6; }
+.msg.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--blue), var(--blue-light));
+  color: #fff; border-bottom-right-radius: 4px;
+}
+[dir="rtl"] .msg.user { align-self: flex-start; border-bottom-right-radius: 16px; border-bottom-left-radius: 4px; }
+.msg.ai {
+  align-self: flex-start;
+  background: var(--bg-alt);
+  color: var(--text); border-bottom-left-radius: 4px;
+  border: 1px solid var(--glass-border);
+}
+[dir="rtl"] .msg.ai { align-self: flex-end; border-bottom-left-radius: 16px; border-bottom-right-radius: 4px; }
+.msg .who { font-size: 0.72rem; opacity: 0.7; margin-bottom: 3px; font-weight: 700; }
+.msg.typing { display: flex; gap: 5px; align-items: center; padding: 16px; }
+.msg.typing span {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+  animation: bounce 1.2s infinite;
+}
+.msg.typing span:nth-child(2) { animation-delay: 0.2s; }
+.msg.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+.suggest-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.chip {
+  padding: 7px 14px; border-radius: 999px; font-size: 0.83rem;
+  background: rgba(196,155,94,0.14); color: var(--gold-dark);
+  border: 1px solid rgba(196,155,94,0.3); cursor: pointer;
+  transition: var(--transition); font-weight: 600;
+}
+[data-theme="dark"] .chip { color: var(--gold-light); }
+.chip:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
+
+.chat-input-row { display: flex; gap: 10px; }
+.chat-input-row input {
+  flex: 1; padding: 14px 18px; border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--card-bg); color: var(--text);
+  font-size: 0.98rem; outline: none; transition: var(--transition);
+  font-family: inherit;
+}
+.chat-input-row input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(196,155,94,0.2); }
+.send-btn {
+  padding: 0 24px; border-radius: 999px; border: none;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff; font-weight: 700; cursor: pointer; font-size: 0.95rem;
+  transition: var(--transition); white-space: nowrap;
+}
+.send-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.send-btn:active { transform: scale(0.96); }
+
+/* ============ 推荐区 ============ */
+.recommend-block { margin-bottom: 40px; }
+.card-grid {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.rec-card {
+  border-radius: var(--radius); overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition); cursor: pointer;
+  display: flex; flex-direction: column; position: relative;
+}
+.rec-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+.rec-visual {
+  height: 150px; display: flex; align-items: center; justify-content: center;
+  font-size: 3.4rem; position: relative; overflow: hidden;
+}
+.rec-visual::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(0,0,0,0.15));
+}
+/* 产地小圆标 */
+.origin-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px 5px 9px; border-radius: 999px;
+  font-size: 0.74rem; font-weight: 700; color: #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+[dir="rtl"] .origin-badge { left: auto; right: 12px; }
+.origin-badge .pin {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.9); box-shadow: 0 0 6px rgba(255,255,255,0.7);
+}
+/* 各产地主题色 */
+.origin-cn { background: linear-gradient(120deg,#B22222,#C49B5E); }   /* 中国·红金 */
+.origin-ar { background: linear-gradient(120deg,#1E6B4F,#C49B5E); }   /* 阿拉伯·绿金 */
+.origin-ca { background: linear-gradient(120deg,#1A3A5C,#C49B5E); }   /* 中亚·蓝金 */
+.origin-in { background: linear-gradient(120deg,#D9752B,#C49B5E); }   /* 印度·橙金 */
+.origin-eg { background: linear-gradient(120deg,#B8912F,#E0C87A); }   /* 埃及·沙金 */
+
+.rec-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+.rec-body h4 { font-size: 1.1rem; margin-bottom: 6px; }
+.rec-body p { font-size: 0.88rem; color: var(--text-muted); flex: 1; }
+.rec-foot {
+  margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+}
+.rec-price { font-weight: 700; color: var(--gold-dark); font-size: 1.05rem; }
+[data-theme="dark"] .rec-price { color: var(--gold-light); }
+.rec-action {
+  font-size: 0.82rem; padding: 6px 14px; border-radius: 999px;
+  background: var(--blue); color: #fff; font-weight: 600;
+  transition: var(--transition);
+}
+.rec-card:hover .rec-action { background: var(--gold); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: calc(90px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%) translateY(120px);
+  background: var(--blue); color: #fff; padding: 14px 26px; border-radius: 999px;
+  box-shadow: var(--shadow-lg); font-weight: 600; z-index: 250;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); font-size: 0.92rem;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ============ 底部 Tab 导航栏 ============ */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
+  display: flex; justify-content: space-around; align-items: stretch;
+  padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+  background: var(--glass-bg);
+  border-top: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 -6px 24px var(--glass-shadow);
+}
+.tab {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 4px; border: none; background: none; cursor: pointer;
+  color: var(--text-muted); font-family: inherit; font-size: 0.72rem; font-weight: 600;
+  border-radius: 14px; transition: var(--transition); position: relative;
+}
+.tab .tab-icon {
+  font-size: 1.35rem; line-height: 1;
+  transition: transform var(--transition);
+  filter: grayscale(0.4); opacity: 0.7;
+}
+.tab .tab-label { transition: var(--transition); }
+.tab:hover { color: var(--text-soft); }
+.tab:hover .tab-icon { transform: translateY(-2px); }
+.tab.active { color: var(--gold-dark); }
+[data-theme="dark"] .tab.active { color: var(--gold-light); }
+.tab.active .tab-icon { transform: translateY(-3px) scale(1.15); filter: grayscale(0); opacity: 1; }
+.tab.active::before {
+  content: ""; position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 4px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+}
+
+/* ============ 首页：快速入口 ============ */
+.quick-grid {
+  display: grid; gap: 16px; margin-bottom: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.quick-card {
+  padding: 24px 20px; border-radius: var(--radius); cursor: pointer;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px); box-shadow: var(--shadow-sm);
+  transition: var(--transition); text-align: center;
+}
+.quick-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+.quick-card .q-icon { font-size: 2.4rem; display: block; margin-bottom: 10px; }
+.quick-card h4 { font-size: 1.15rem; margin-bottom: 6px; }
+.quick-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ============ 首页：文化走廊 ============ */
+.corridor-block { padding: 28px; }
+.corridor { display: flex; flex-direction: column; gap: 0; margin-top: 12px; }
+.corridor-stop {
+  display: flex; align-items: flex-start; gap: 16px; padding: 14px 0;
+  position: relative;
+}
+.corridor-stop:not(:last-child)::after {
+  content: ""; position: absolute; left: 23px; top: 52px; bottom: -8px; width: 2px;
+  background: linear-gradient(var(--gold), transparent);
+}
+[dir="rtl"] .corridor-stop:not(:last-child)::after { left: auto; right: 23px; }
+.corridor-node {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--blue), var(--blue-light)); color: #fff;
+  box-shadow: var(--shadow-sm); z-index: 1;
+}
+.corridor-info h4 { font-size: 1.05rem; margin-bottom: 3px; }
+.corridor-info p { color: var(--text-soft); font-size: 0.9rem; }
+
+/* ============ 丝路页 ============ */
+.silk-grid {
+  display: grid; gap: 18px; margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.silk-card {
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  background: var(--card-bg); border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm); transition: var(--transition);
+}
+.silk-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+.silk-banner {
+  height: 110px; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; position: relative;
+}
+.silk-banner .country-flag { position: absolute; bottom: 10px; right: 14px; font-size: 1.6rem; }
+[dir="rtl"] .silk-banner .country-flag { right: auto; left: 14px; }
+.silk-body { padding: 16px 18px; }
+.silk-body .silk-country {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px;
+}
+.silk-body h4 { font-size: 1.1rem; margin-bottom: 6px; }
+.silk-body p { color: var(--text-muted); font-size: 0.88rem; }
+
+/* ============ 我的页面 ============ */
+.profile-head { padding: 26px; display: flex; align-items: center; gap: 18px; }
+.avatar {
+  width: 68px; height: 68px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  box-shadow: 0 6px 18px rgba(196,155,94,0.5);
+}
+.profile-meta h3 { font-size: 1.3rem; }
+.profile-meta p { color: var(--text-muted); font-size: 0.9rem; }
+.profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+.stat-card {
+  padding: 20px 12px; border-radius: var(--radius-sm); text-align: center;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
+}
+.stat-num {
+  display: block; font-size: 1.9rem; font-weight: 800; color: var(--gold-dark);
+}
+[data-theme="dark"] .stat-num { color: var(--gold-light); }
+.stat-label { font-size: 0.82rem; color: var(--text-muted); }
+.history-block, .settings-block { padding: 24px; }
+.history-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.clear-btn { padding: 6px 14px; font-size: 0.8rem; }
+.history-list { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.history-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--radius-sm);
+  background: var(--card-bg); border: 1px solid var(--glass-border);
+}
+.history-item .h-thumb {
+  width: 42px; height: 42px; border-radius: 10px; object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--gold);
+}
+.history-item .h-info { flex: 1; }
+.history-item .h-info h5 { font-size: 0.98rem; }
+.history-item .h-info span { font-size: 0.8rem; color: var(--text-muted); }
+.history-empty { color: var(--text-muted); text-align: center; padding: 20px; font-size: 0.9rem; }
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+  padding: 14px 0; border-bottom: 1px solid var(--glass-border); font-weight: 600;
+}
+.setting-row:last-child { border-bottom: none; }
+.setting-row:hover { color: var(--gold-dark); }
+.setting-val { color: var(--text-muted); font-weight: 600; }
+
+/* ============ 底部（各页共享，简化版） ============ */
+footer {
+  border-top: 1px solid var(--glass-border);
+  text-align: center; padding: 28px 20px 10px; margin-top: 12px;
+}
+.footer-slogan {
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;
+  background: linear-gradient(120deg, var(--blue), var(--gold-dark));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+[data-theme="dark"] .footer-slogan {
+  background: linear-gradient(120deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.footer-newstart {
+  color: var(--gold-dark); font-weight: 700; font-size: 0.92rem; margin-bottom: 14px;
+  padding: 10px 20px; border-radius: 999px; display: inline-block;
+  background: rgba(196,155,94,0.12); border: 1px solid rgba(196,155,94,0.3);
+}
+[data-theme="dark"] .footer-newstart { color: var(--gold-light); }
+.footer-copy { color: var(--text-muted); font-size: 0.82rem; }
+
+/* 隐藏文件输入 */
+#fileInput { display: none; }
+
+/* ============ 动画 ============ */
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes scan { 0%{top:0} 50%{top:calc(100% - 3px)} 100%{top:0} }
+@keyframes shine { to { background-position: 200% center; } }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:translateY(0)} }
+@keyframes msgIn { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-8px)} }
+
+/* ============ 响应式 ============ */
+@media (max-width: 640px) {
+  .nav { padding: 12px 16px; }
+  .logo { font-size: 1.15rem; }
+  .btn-ghost { padding: 8px 12px; font-size: 0.82rem; }
+  main { padding: 24px 16px calc(84px + env(safe-area-inset-bottom)); }
+  .upload-block, .narrative-block, .qa-block, .corridor-block, .history-block, .settings-block { padding: 20px 16px; }
+  .dropzone { padding: 36px 16px; }
+  .result-info h2 { font-size: 1.4rem; }
+  .msg { max-width: 88%; }
+  .hero { padding: 16px 0 30px; }
+  .profile-stats { gap: 8px; }
+  .stat-num { font-size: 1.5rem; }
+  .tab .tab-label { font-size: 0.68rem; }
+  .tab .tab-icon { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 导航 ============ -->
+<header>
+  <nav class="nav">
+    <div class="logo" onclick="switchPage('home')">
+      <span class="crescent">☪</span>
+      <span class="brand-txt" data-i18n="brand">文明信使</span>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="langBtn" onclick="toggleLang()">
+        <span id="langLabel">العربية</span>
+      </button>
+      <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="切换主题">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- ==================== 首页 ==================== -->
+  <section class="page active" id="page-home" data-page="home">
+    <div class="hero">
+      <h1 data-i18n="heroTitle">让文明的符号跨越山海对话</h1>
+      <p data-i18n="heroSub">上传一张文化符号图片，AI 为你解读它的历史渊源、工艺演变，以及中华文明与阿拉伯世界交流的动人故事。</p>
+    </div>
+
+    <!-- 快速入口 -->
+    <div class="quick-grid">
+      <div class="quick-card" onclick="switchPage('recognize')">
+        <span class="q-icon">📷</span>
+        <h4 data-i18n="quickRecognize">开始识别</h4>
+        <p data-i18n="quickRecognizeSub">上传图片，AI 解读文化符号</p>
+      </div>
+      <div class="quick-card" onclick="switchPage('qa')">
+        <span class="q-icon">💬</span>
+        <h4 data-i18n="quickQa">智能问答</h4>
+        <p data-i18n="quickQaSub">追问文化符号背后的故事</p>
+      </div>
+      <div class="quick-card" onclick="switchPage('silk')">
+        <span class="q-icon">🛣️</span>
+        <h4 data-i18n="quickSilk">丝路走廊</h4>
+        <p data-i18n="quickSilkSub">游览沿线国家的文化瑰宝</p>
+      </div>
+    </div>
+
+    <!-- 一带一路文化走廊 -->
+    <div class="glass corridor-block">
+      <div class="section-title"><span class="dot"></span><span data-i18n="corridorTitle">一带一路 · 文化走廊</span></div>
+      <div class="section-sub" data-i18n="corridorSub">一条商路，串起东西方文明的千年对话</div>
+      <div class="corridor" id="corridor"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 识别页 ==================== -->
+  <section class="page" id="page-recognize" data-page="recognize">
+    <div class="glass upload-block">
+      <div class="section-title"><span class="dot"></span><span data-i18n="uploadTitle">文化符号智能识别</span></div>
+      <div class="section-sub" data-i18n="uploadSub">支持青花瓷、丝绸、阿拉伯书法等文化符号的 AI 识别</div>
+
+      <!-- 拖拽上传 -->
+      <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+        <div class="up-icon">🏺</div>
+        <h3 data-i18n="dropTitle">点击或拖拽图片到此处</h3>
+        <p data-i18n="dropDesc">或直接选择下方示例快速体验</p>
+        <div class="formats">
+          <span class="tag" onclick="event.stopPropagation();demoRecognize('porcelain')" data-i18n="demoPorcelain">🔵 青花瓷</span>
+          <span class="tag" onclick="event.stopPropagation();demoRecognize('silk')" data-i18n="demoSilk">🧵 丝绸</span>
+          <span class="tag" onclick="event.stopPropagation();demoRecognize('calligraphy')" data-i18n="demoCalligraphy">✒️ 阿拉伯书法</span>
+        </div>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])">
+
+      <!-- 加载 -->
+      <div class="loading-box" id="loadingBox">
+        <div class="scanner" id="scanner">
+          <div class="scan-line"></div>
+        </div>
+        <div class="spinner"></div>
+        <p data-i18n="analyzing">AI 正在识别文化符号…</p>
+        <div class="loading-steps" id="loadingSteps"></div>
+      </div>
+
+      <!-- 结果 -->
+      <div class="result-box" id="resultBox">
+        <div class="result-head">
+          <img class="result-thumb" id="resultThumb" alt="识别图">
+          <div class="result-info">
+            <div class="label" data-i18n="recognized">识别结果</div>
+            <h2 id="resultName">—<span class="ar-name" id="resultNameAr"></span></h2>
+            <div class="confidence">
+              <span data-i18n="confidence">置信度</span>
+              <div class="conf-bar"><div class="conf-fill" id="confFill"></div></div>
+              <span class="conf-num" id="confNum">0%</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-ghost reset-btn" onclick="resetAll()">
+          <span>↺</span><span data-i18n="reset">重新识别</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- AI 叙事区 -->
+    <div class="glass narrative-block" id="narrativeBlock">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span data-i18n="narrativeTitle">深度文化叙事</span>
+        <span class="ai-badge">✦ AI</span>
+      </div>
+      <div class="section-sub" id="narrativeSub" data-i18n="narrativeSub">由 AI 生成的文化符号深度解读</div>
+      <div class="narrative-content" id="narrativeContent"></div>
+    </div>
+
+    <!-- 丝路好物推荐区 -->
+    <div class="recommend-block">
+      <div class="section-title"><span class="dot"></span><span data-i18n="recTitle">🛣️ 丝路好物 · 从长安到巴格达</span></div>
+      <div class="section-sub" data-i18n="recSub">依识别结果匹配沿途驿站精选，每件好物都标注它的产地</div>
+      <div class="card-grid" id="recGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 问答页 ==================== -->
+  <section class="page" id="page-qa" data-page="qa">
+    <div class="glass qa-block">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span data-i18n="qaTitle">智能文化问答</span>
+        <span class="ai-badge">✦ AI</span>
+      </div>
+      <div class="section-sub" data-i18n="qaSub">向 AI 提问，深入了解文化符号背后的故事</div>
+
+      <div class="chat-window" id="chatWindow"></div>
+
+      <div class="suggest-chips" id="suggestChips"></div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" data-i18n-ph="chatPlaceholder" placeholder="输入你的问题，例如：这个纹样有什么含义？" onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="send-btn" onclick="sendMessage()" data-i18n="send">发送</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 丝路页 ==================== -->
+  <section class="page" id="page-silk" data-page="silk">
+    <div class="section-title"><span class="dot"></span><span data-i18n="silkTitle">🛣️ 一带一路 · 文化符号地图</span></div>
+    <div class="section-sub" data-i18n="silkSub">点击沿线国家，探索它们献给世界的文化瑰宝</div>
+    <div class="silk-grid" id="silkGrid"></div>
+  </section>
+
+  <!-- ==================== 我的页面 ==================== -->
+  <section class="page" id="page-profile" data-page="profile">
+    <div class="glass profile-head">
+      <div class="avatar">☪</div>
+      <div class="profile-meta">
+        <h3 data-i18n="profileName">文明旅行者</h3>
+        <p data-i18n="profileTag">丝路数字驿站 · 会员</p>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="stat-card"><span class="stat-num" id="statScan">0</span><span class="stat-label" data-i18n="statScan">识别次数</span></div>
+      <div class="stat-card"><span class="stat-num" id="statAsk">0</span><span class="stat-label" data-i18n="statAsk">提问次数</span></div>
+      <div class="stat-card"><span class="stat-num" id="statFav">0</span><span class="stat-label" data-i18n="statFav">收藏好物</span></div>
+    </div>
+
+    <div class="glass history-block">
+      <div class="history-head">
+        <div class="section-title"><span class="dot"></span><span data-i18n="historyTitle">识别历史</span></div>
+        <button class="btn-ghost clear-btn" onclick="clearHistory()" data-i18n="clearHistory">清空</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+
+    <div class="glass fav-block">
+      <div class="history-head">
+        <div class="section-title"><span class="dot"></span><span data-i18n="favTitle">收藏好物</span></div>
+        <button class="btn-ghost clear-btn" onclick="clearFavorites()" data-i18n="clearFav">清空</button>
+      </div>
+      <div class="card-grid" id="favGrid"></div>
+    </div>
+
+    <div class="glass settings-block">
+      <div class="section-title"><span class="dot"></span><span data-i18n="settingsTitle">偏好设置</span></div>
+      <div class="setting-row" onclick="toggleTheme()">
+        <span data-i18n="settingTheme">深色 / 浅色主题</span>
+        <span class="setting-val" id="settingThemeVal">🌙</span>
+      </div>
+      <div class="setting-row" onclick="toggleLang()">
+        <span data-i18n="settingLang">语言 Language</span>
+        <span class="setting-val" id="settingLangVal">العربية</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚（各页共享） -->
+  <footer>
+    <div class="footer-slogan" data-i18n="slogan">文明因交流而多彩，文化因互鉴而丰富</div>
+    <div class="footer-newstart" data-i18n="newStart">文明信使 · 让每一次扫描都成为文明对话的新开始</div>
+    <div class="footer-copy">© 2026 文明信使 Civilization Messenger · <span data-i18n="rights">保留所有权利</span></div>
+  </footer>
+</main>
+
+<!-- ==================== 底部 Tab 导航 ==================== -->
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-tab="home" onclick="switchPage('home')">
+    <span class="tab-icon">🏠</span><span class="tab-label" data-i18n="tabHome">首页</span>
+  </button>
+  <button class="tab" data-tab="recognize" onclick="switchPage('recognize')">
+    <span class="tab-icon">📷</span><span class="tab-label" data-i18n="tabRecognize">识别</span>
+  </button>
+  <button class="tab" data-tab="qa" onclick="switchPage('qa')">
+    <span class="tab-icon">💬</span><span class="tab-label" data-i18n="tabQa">问答</span>
+  </button>
+  <button class="tab" data-tab="silk" onclick="switchPage('silk')">
+    <span class="tab-icon">🛣️</span><span class="tab-label" data-i18n="tabSilk">丝路</span>
+  </button>
+  <button class="tab" data-tab="profile" onclick="switchPage('profile')">
+    <span class="tab-icon">👤</span><span class="tab-label" data-i18n="tabProfile">我的</span>
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+const DATA = {
+  porcelain: {
+    icon: "🏺", color: "linear-gradient(135deg,#1A3A5C,#2C5480)",
+    name: { zh: "青花瓷", ar: "الخزف الأزرق والأبيض" },
+    confidence: 96,
+    narrative: {
+      zh: [
+        { icon:"📜", title:"历史渊源", text:"青花瓷起源于唐代，成熟于元代景德镇。它以钴料在白瓷胎上绘制纹样，再罩透明釉经高温一次烧成，是釉下彩工艺的巅峰之作。" },
+        { icon:"⚒️", title:"工艺演变", text:"从唐青花的初创，到元青花的雄浑大气，再到明清的精细秀雅，青花瓷的釉下彩技艺历经千年不断精进，成为中国瓷器的代表。" },
+        { icon:"🌍", title:"文明交流", text:"元明时期，青花瓷通过丝绸之路与海上航线大量输往阿拉伯世界。其钴料多来自波斯，纹样也吸收了伊斯兰几何与缠枝装饰，是中阿文明互鉴的结晶。" }
+      ],
+      ar: [
+        { icon:"📜", title:"الأصل التاريخي", text:"نشأ الخزف الأزرق والأبيض في عهد أسرة تانغ ونضج في عهد يوان بمدينة جينغدتشن، وهو ذروة فن التزيين تحت الطلاء." },
+        { icon:"⚒️", title:"تطور الحرفة", text:"من بداياته في عهد تانغ إلى عظمته في عهد يوان ثم رقيه في عهدي مينغ وتشينغ، تطورت حرفته عبر آلاف السنين." },
+        { icon:"🌍", title:"تبادل الحضارات", text:"عبر طريق الحرير، وصل إلى العالم العربي، وكان الكوبالت من بلاد فارس، واستوحيت زخارفه من الفن الإسلامي الهندسي." }
+      ]
+    },
+    questions: {
+      zh: ["这个纹样有什么含义？","青花瓷为什么是蓝色的？","它如何传入阿拉伯世界？"],
+      ar: ["ماذا تعني هذه الزخرفة؟","لماذا لون الخزف أزرق؟","كيف وصل إلى العالم العربي؟"]
+    }
+  },
+  silk: {
+    icon: "🧵", color: "linear-gradient(135deg,#A47E45,#DFC08C)",
+    name: { zh: "丝绸", ar: "الحرير" },
+    confidence: 93,
+    narrative: {
+      zh: [
+        { icon:"📜", title:"历史渊源", text:"丝绸是中国最早的文化符号之一，早在新石器时代先民便已掌握养蚕缫丝技术，丝绸成为华夏文明的独特名片。" },
+        { icon:"⚒️", title:"工艺演变", text:"从平纹素绢到提花锦缎，中国丝织工艺不断创新。蜀锦、宋锦、云锦并称三大名锦，纹样华美，织造精妙。" },
+        { icon:"🌍", title:"文明交流", text:"丝绸之路因丝绸而得名，这条贯通欧亚的商路将中国丝绸带往阿拉伯、波斯与罗马，也把西域文化带回东方，连接东西方文明。" }
+      ],
+      ar: [
+        { icon:"📜", title:"الأصل التاريخي", text:"الحرير من أقدم الرموز الثقافية الصينية، وقد أتقن الأجداد تربية دود القز منذ العصر الحجري الحديث." },
+        { icon:"⚒️", title:"تطور الحرفة", text:"من النسيج البسيط إلى الديباج المزخرف، تطورت حرفة نسج الحرير الصيني باستمرار." },
+        { icon:"🌍", title:"تبادل الحضارات", text:"سُمي طريق الحرير باسمه، وهذا الطريق ربط الصين بالعالم العربي وفارس وروما، وجمع بين حضارات الشرق والغرب." }
+      ]
+    },
+    questions: {
+      zh: ["丝绸之路有多长？","丝绸如何影响阿拉伯纺织？","古代丝绸如何染色？"],
+      ar: ["ما طول طريق الحرير؟","كيف أثر الحرير في النسيج العربي؟","كيف كان يُصبغ الحرير قديماً؟"]
+    }
+  },
+  calligraphy: {
+    icon: "✒️", color: "linear-gradient(135deg,#12283F,#C49B5E)",
+    name: { zh: "阿拉伯书法", ar: "الخط العربي" },
+    confidence: 91,
+    narrative: {
+      zh: [
+        { icon:"📜", title:"历史渊源", text:"阿拉伯书法是伊斯兰艺术的核心形式，随《古兰经》的传抄而发展，体现了穆斯林对神圣文字的敬畏与虔诚。" },
+        { icon:"⚒️", title:"工艺演变", text:"从早期的库法体到流畅的纳斯赫体、优雅的迪瓦尼体，阿拉伯书法演化出众多风格，字母被塑造成充满韵律的视觉艺术。" },
+        { icon:"🌍", title:"文明交流", text:"阿拉伯书法与中国书法在丝绸之路上相遇，催生了独特的『中国回族经字画』，成为两大书写文明彼此欣赏、融合的见证。" }
+      ],
+      ar: [
+        { icon:"📜", title:"الأصل التاريخي", text:"الخط العربي جوهر الفن الإسلامي، تطور مع نسخ القرآن الكريم، ويجسد تقديس المسلمين للنص المقدس." },
+        { icon:"⚒️", title:"تطور الحرفة", text:"من الخط الكوفي المبكر إلى النسخ الانسيابي والديواني الأنيق، تطورت أنماط عديدة للخط العربي." },
+        { icon:"🌍", title:"تبادل الحضارات", text:"التقى الخط العربي بالخط الصيني على طريق الحرير، فنشأ فن 'الخط الصيني الإسلامي' الفريد شاهداً على تلاقح الحضارتين." }
+      ]
+    },
+    questions: {
+      zh: ["库法体有什么特点？","书法为何在伊斯兰艺术中重要？","中阿书法如何融合？"],
+      ar: ["ما خصائص الخط الكوفي؟","لماذا الخط مهم في الفن الإسلامي؟","كيف امتزج الخطان الصيني والعربي؟"]
+    }
+  },
+  spice: {
+    icon: "🧂", color: "linear-gradient(135deg,#D9752B,#C49B5E)",
+    name: { zh: "香料", ar: "التوابل" },
+    confidence: 89,
+    narrative: {
+      zh: [
+        { icon:"📜", title:"历史渊源", text:"香料是丝绸之路与海上香料之路上最珍贵的货物之一。胡椒、豆蔻、肉桂等自古便是连接东西方的『黄金』。" },
+        { icon:"⚒️", title:"工艺演变", text:"从采摘、晾晒到研磨调配，香料的处理凝聚着各地匠人的智慧，也催生了丰富多样的饮食与香文化。" },
+        { icon:"🌍", title:"文明交流", text:"产自印度的香料经中亚与阿拉伯商人之手远销东西方，既调和了各地饮食，也串起了沿途文明的往来与融合。" }
+      ],
+      ar: [
+        { icon:"📜", title:"الأصل التاريخي", text:"التوابل من أثمن بضائع طريق الحرير وطريق التوابل البحري، فالفلفل والهيل والقرفة كانت 'ذهب' يربط الشرق بالغرب." },
+        { icon:"⚒️", title:"تطور الحرفة", text:"من القطف والتجفيف إلى الطحن والمزج، تجسّد معالجة التوابل حكمة الحرفيين وثقافات الطعام المتنوعة." },
+        { icon:"🌍", title:"تبادل الحضارات", text:"انتقلت التوابل الهندية عبر تجار آسيا الوسطى والعرب إلى الشرق والغرب، فمزجت المذاقات وربطت الحضارات." }
+      ]
+    },
+    questions: {
+      zh: ["香料如何影响古代贸易？","哪些香料最珍贵？","香料之路经过哪些地方？"],
+      ar: ["كيف أثرت التوابل في التجارة القديمة؟","ما أثمن التوابل؟","بأي المناطق مرّ طريق التوابل؟"]
+    }
+  }
+};
+
+/* ========= 丝路好物：产地 + 商品库（与后端 app.py 保持一致，作为离线回退） ========= */
+const ORIGINS = {
+  jingdezhen: { zh:"中国·景德镇", ar:"الصين · جينغدتشن", theme:"cn" },
+  suzhou:     { zh:"中国·苏州",   ar:"الصين · سوتشو",   theme:"cn" },
+  damascus:   { zh:"阿拉伯·大马士革", ar:"العرب · دمشق", theme:"ar" },
+  baghdad:    { zh:"阿拉伯·巴格达",   ar:"العرب · بغداد", theme:"ar" },
+  samarkand:  { zh:"中亚·撒马尔罕",   ar:"آسيا الوسطى · سمرقند", theme:"ca" },
+  india:      { zh:"印度",        ar:"الهند",          theme:"in" },
+  egypt:      { zh:"埃及",        ar:"مصر",            theme:"eg" }
+};
+
+const SILKROAD = {
+  jingdezhen: [
+    { name:{zh:"青花瓷茶杯",ar:"كوب شاي خزفي أزرق"}, price:"¥128", image:"🍵", link:"#" },
+    { name:{zh:"青花瓷丝巾",ar:"وشاح حريري بنقش الخزف"}, price:"¥268", image:"🧣", link:"#" }
+  ],
+  suzhou: [
+    { name:{zh:"苏绣团扇",ar:"مروحة مطرزة"}, price:"¥188", image:"🪭", link:"#" },
+    { name:{zh:"真丝围巾",ar:"وشاح حرير طبيعي"}, price:"¥399", image:"🧣", link:"#" }
+  ],
+  damascus: [
+    { name:{zh:"大马士革铜器摆件",ar:"تحفة نحاسية دمشقية"}, price:"¥320", image:"🫖", link:"#" },
+    { name:{zh:"手工香薰炉",ar:"مبخرة يدوية الصنع"}, price:"¥156", image:"🪔", link:"#" }
+  ],
+  baghdad: [
+    { name:{zh:"书法镇纸",ar:"مثقلة ورق للخط"}, price:"¥188", image:"✒️", link:"#" },
+    { name:{zh:"天文仪模型",ar:"نموذج الإسطرلاب"}, price:"¥420", image:"🔭", link:"#" }
+  ],
+  samarkand: [
+    { name:{zh:"撒马尔罕丝巾",ar:"وشاح سمرقند الحريري"}, price:"¥399", image:"🧣", link:"#" },
+    { name:{zh:"中亚陶器",ar:"فخار آسيا الوسطى"}, price:"¥220", image:"🏺", link:"#" }
+  ],
+  india: [
+    { name:{zh:"香料礼盒",ar:"علبة توابل هدية"}, price:"¥88", image:"🧂", link:"#" },
+    { name:{zh:"瑜伽垫",ar:"سجادة يوغا"}, price:"¥199", image:"🧘", link:"#" }
+  ],
+  egypt: [
+    { name:{zh:"纸莎草画",ar:"لوحة بردي"}, price:"¥150", image:"🖼️", link:"#" },
+    { name:{zh:"金字塔模型",ar:"نموذج الهرم"}, price:"¥220", image:"🔺", link:"#" }
+  ]
+};
+
+/* 识别结果 → 主要产地（匹配规则） */
+const SYMBOL_ORIGINS = {
+  porcelain:   ["jingdezhen"],
+  silk:        ["suzhou","samarkand"],
+  calligraphy: ["damascus","baghdad"],
+  spice:       ["india"]
+};
+
+/* 故事结尾自动署名（丝路数字驿站） */
+const SIGNATURE = {
+  zh:"—— 来自文明信使 · 丝路数字驿站",
+  ar:"—— من رسول الحضارة · محطة طريق الحرير الرقمية"
+};
+
+/* 依识别结果匹配丝路好物；不足则用其它驿站补齐 */
+function matchProducts(symbol, lang, limit){
+  limit = limit || 6;
+  let primary = SYMBOL_ORIGINS[symbol];
+  if(!primary){ // 识别不到 → 随机两个驿站
+    const keys = Object.keys(SILKROAD);
+    primary = [keys[Math.floor(Math.random()*keys.length)]];
+  }
+  const ordered = primary.concat(Object.keys(SILKROAD).filter(o=>!primary.includes(o)));
+  const out = [];
+  for(const ok of ordered){
+    for(const item of SILKROAD[ok]){
+      const o = ORIGINS[ok];
+      out.push({
+        name: item.name[lang] || item.name.zh,
+        price: item.price, image: item.image, link: item.link,
+        origin: o[lang] || o.zh, theme: o.theme
+      });
+      if(out.length >= limit) return out;
+    }
+  }
+  return out;
+}
+
+/* AI 问答模拟回答 */
+const AI_ANSWERS = {
+  zh: {
+    default: "这是一个很好的问题！根据文化研究，该符号承载着深厚的历史意义，是不同文明相互交流、彼此启发的珍贵见证。它提醒我们：人类文明因交流而多彩，因互鉴而丰富。",
+    keywords: [
+      { k:["纹样","含义","意义","象征"], a:"这类纹样通常象征吉祥、繁荣与和谐。以缠枝纹为例，连绵不断的枝蔓寓意生生不息、福泽绵长；而几何纹样则体现了对秩序与永恒之美的追求，是不同文明共同珍视的审美语言。" },
+      { k:["蓝色","颜色","钴"], a:"这种独特的蓝色来自钴料。中国元代青花瓷多使用来自波斯的『苏麻离青』钴料，经高温烧制后呈现浓艳的蓝色，这本身就是中阿贸易与技术交流的直接产物。" },
+      { k:["阿拉伯","传入","丝绸之路","传播","交流"], a:"它主要通过陆上丝绸之路和海上航线传播。中国的商品与技艺经由中亚、波斯抵达阿拉伯世界，同时也带回异域的原料、纹样与审美，形成了双向的文明对话。" },
+      { k:["历史","起源","起源于","何时"], a:"从历史脉络看，这一文化符号历经多个朝代的演进，凝聚了历代匠人的智慧。它的每一次革新，往往都伴随着与外来文化的接触与融合。" },
+      { k:["工艺","制作","技术","怎么做"], a:"其制作工艺极为讲究，需要经验丰富的匠人历经多道繁复工序方能完成。这些技艺多以师徒相传的方式延续至今，是宝贵的非物质文化遗产。" }
+    ]
+  },
+  ar: {
+    default: "سؤال ممتاز! وفقاً للدراسات الثقافية، يحمل هذا الرمز معنى تاريخياً عميقاً، وهو شاهد ثمين على تبادل الحضارات وإلهامها المتبادل. إنه يذكرنا بأن حضارة الإنسان تزدهر بالتبادل وتغتني بالتلاقح.",
+    keywords: [
+      { k:["زخرفة","معنى","رمز"], a:"عادةً ما ترمز هذه الزخارف إلى الخير والازدهار والانسجام. الزخارف الهندسية تعكس السعي نحو النظام والجمال الأبدي، وهي لغة جمالية تشترك فيها الحضارات." },
+      { k:["أزرق","لون","كوبالت"], a:"يأتي هذا اللون الأزرق المميز من الكوبالت. استخدم الخزف الصيني كوبالت 'سوماليتشينغ' الفارسي، وهو نتاج مباشر للتبادل التجاري والتقني بين الصين والعالم العربي." },
+      { k:["عربي","طريق الحرير","انتشار","وصل"], a:"انتشر أساساً عبر طريق الحرير البري والطرق البحرية، حاملاً البضائع والحرف الصينية إلى العالم العربي وعائداً بالمواد والزخارف، في حوار حضاري متبادل." },
+      { k:["تاريخ","أصل","متى"], a:"من الناحية التاريخية، مر هذا الرمز الثقافي بتطور عبر عصور عديدة، وكل ابتكار فيه كان يصاحبه تلاقح مع الثقافات الأخرى." },
+      { k:["حرفة","صناعة","كيف"], a:"حرفة صناعته دقيقة جداً وتتطلب حرفيين مهرة عبر خطوات معقدة، وتنتقل هذه المهارات بالتوارث حتى اليوم كتراث ثقافي ثمين." }
+    ]
+  }
+};
+
+/* ================= 国际化 ================= */
+const I18N = {
+  zh: {
+    brand:"文明信使", heroTitle:"让文明的符号跨越山海对话",
+    heroSub:"上传一张文化符号图片，AI 为你解读它的历史渊源、工艺演变，以及中华文明与阿拉伯世界交流的动人故事。",
+    uploadTitle:"文化符号智能识别", uploadSub:"支持青花瓷、丝绸、阿拉伯书法等文化符号的 AI 识别",
+    dropTitle:"点击或拖拽图片到此处", dropDesc:"或直接选择下方示例快速体验",
+    demoPorcelain:"🔵 青花瓷", demoSilk:"🧵 丝绸", demoCalligraphy:"✒️ 阿拉伯书法",
+    analyzing:"AI 正在识别文化符号…", recognized:"识别结果", confidence:"置信度", reset:"重新识别",
+    narrativeTitle:"深度文化叙事", narrativeSub:"由 AI 生成的文化符号深度解读",
+    qaTitle:"智能文化问答", qaSub:"向 AI 提问，深入了解文化符号背后的故事",
+    chatPlaceholder:"输入你的问题，例如：这个纹样有什么含义？", send:"发送",
+    recTitle:"🛣️ 丝路好物 · 从长安到巴格达", recSub:"依识别结果匹配沿途驿站精选，每件好物都标注它的产地",
+    slogan:"文明因交流而多彩，文化因互鉴而丰富",
+    motto:"以科技为舟，载千年文明，架起中阿友谊之桥 · جسر الصداقة بين الحضارات",
+    newStart:"文明信使 · 让每一次扫描都成为文明对话的新开始",
+    rights:"保留所有权利",
+    linkAbout:"关于平台", linkContact:"联系我们", linkPrivacy:"隐私政策", linkHelp:"帮助中心",
+    profileMsg:"个人中心功能即将上线 ✨", welcome:"你好！我是文明信使 AI 助手。识别文化符号后，你可以向我提问，我会为你讲述它背后的文明故事。",
+    uploadTip:"图片已上传，开始识别…", scanStep:["提取图像特征…","匹配文化符号库…","生成置信度评估…","调取深度叙事资料…"],
+    tabHome:"首页", tabRecognize:"识别", tabQa:"问答", tabSilk:"丝路", tabProfile:"我的",
+    quickRecognize:"开始识别", quickRecognizeSub:"上传图片，AI 解读文化符号",
+    quickQa:"智能问答", quickQaSub:"追问文化符号背后的故事",
+    quickSilk:"丝路走廊", quickSilkSub:"游览沿线国家的文化瑰宝",
+    corridorTitle:"一带一路 · 文化走廊", corridorSub:"一条商路，串起东西方文明的千年对话",
+    silkTitle:"🛣️ 一带一路 · 文化符号地图", silkSub:"点击沿线国家，探索它们献给世界的文化瑰宝",
+    profileName:"文明旅行者", profileTag:"丝路数字驿站 · 会员",
+    statScan:"识别次数", statAsk:"提问次数", statFav:"收藏好物",
+    historyTitle:"识别历史", historyEmpty:"还没有识别记录，快去「识别」页体验吧！", clearHistory:"清空",
+    favTitle:"收藏好物", favEmpty:"还没有收藏，去「识别」页点亮心形收藏吧！", clearFav:"清空", reviewTip:"点击回看该识别结果",
+    settingsTitle:"偏好设置", settingTheme:"深色 / 浅色主题", settingLang:"语言 Language",
+    justNow:"刚刚"
+  },
+  ar: {
+    brand:"رسول الحضارة", heroTitle:"لتتحاور رموز الحضارات عبر البحار والجبال",
+    heroSub:"ارفع صورة لرمز ثقافي، ليفسّر لك الذكاء الاصطناعي أصله التاريخي وتطور حرفته وقصص التبادل بين الحضارة الصينية والعالم العربي.",
+    uploadTitle:"التعرف الذكي على الرموز الثقافية", uploadSub:"يدعم التعرف على الخزف والحرير والخط العربي وغيرها",
+    dropTitle:"انقر أو اسحب الصورة هنا", dropDesc:"أو اختر أحد الأمثلة أدناه للتجربة السريعة",
+    demoPorcelain:"🔵 الخزف الأزرق", demoSilk:"🧵 الحرير", demoCalligraphy:"✒️ الخط العربي",
+    analyzing:"الذكاء الاصطناعي يتعرف على الرمز…", recognized:"نتيجة التعرف", confidence:"درجة الثقة", reset:"إعادة التعرف",
+    narrativeTitle:"سرد ثقافي عميق", narrativeSub:"تفسير عميق للرمز الثقافي بواسطة الذكاء الاصطناعي",
+    qaTitle:"أسئلة ثقافية ذكية", qaSub:"اسأل الذكاء الاصطناعي لتعرف القصص وراء الرموز الثقافية",
+    chatPlaceholder:"اكتب سؤالك، مثل: ماذا تعني هذه الزخرفة؟", send:"إرسال",
+    recTitle:"🛣️ كنوز طريق الحرير · من تشانغآن إلى بغداد", recSub:"مختارات من محطات الطريق حسب نتيجة التعرف، كل قطعة تحمل منشأها",
+    slogan:"الحضارة تزدهر بالتبادل، والثقافة تغتني بالتلاقح",
+    motto:"بالتقنية سفينةً، نحمل حضارة آلاف السنين، ونبني جسر الصداقة الصيني العربي",
+    newStart:"رسول الحضارة · لتصبح كل عملية مسح بداية جديدة لحوار الحضارات",
+    rights:"جميع الحقوق محفوظة",
+    linkAbout:"عن المنصة", linkContact:"اتصل بنا", linkPrivacy:"سياسة الخصوصية", linkHelp:"مركز المساعدة",
+    profileMsg:"ميزة المركز الشخصي قريباً ✨", welcome:"مرحباً! أنا مساعد رسول الحضارة الذكي. بعد التعرف على الرمز الثقافي يمكنك سؤالي وسأروي لك قصته الحضارية.",
+    uploadTip:"تم رفع الصورة، جارٍ التعرف…", scanStep:["استخراج ملامح الصورة…","مطابقة قاعدة الرموز الثقافية…","تقييم درجة الثقة…","جلب مواد السرد العميق…"],
+    tabHome:"الرئيسية", tabRecognize:"تعرّف", tabQa:"أسئلة", tabSilk:"طريق الحرير", tabProfile:"حسابي",
+    quickRecognize:"ابدأ التعرف", quickRecognizeSub:"ارفع صورة ليفسّرها الذكاء الاصطناعي",
+    quickQa:"أسئلة ذكية", quickQaSub:"اسأل عن قصص الرموز الثقافية",
+    quickSilk:"ممر طريق الحرير", quickSilkSub:"تجوّل في كنوز دول الطريق",
+    corridorTitle:"الحزام والطريق · الممر الثقافي", corridorSub:"طريق تجاري واحد يربط حوار حضارات الشرق والغرب عبر آلاف السنين",
+    silkTitle:"🛣️ الحزام والطريق · خريطة الرموز الثقافية", silkSub:"انقر على دول الطريق لاكتشاف كنوزها الثقافية",
+    profileName:"رحّالة الحضارات", profileTag:"محطة طريق الحرير الرقمية · عضو",
+    statScan:"مرات التعرف", statAsk:"عدد الأسئلة", statFav:"المفضلة",
+    historyTitle:"سجل التعرف", historyEmpty:"لا يوجد سجل بعد، جرّب صفحة التعرف!", clearHistory:"مسح",
+    settingsTitle:"التفضيلات", settingTheme:"الوضع الداكن / الفاتح", settingLang:"اللغة Language",
+    justNow:"الآن"
+  }
+};
+
+let LANG = "zh";
+let currentSymbol = null;
+let currentProducts = null;   // 后端 /api/recognize 返回的丝路好物（若在线）
+let currentStory = null;      // 后端返回的 AI 故事（含丝路关联 + 署名）
+const API_BASE = "http://127.0.0.1:5000";   // 后端地址；离线时自动回退本地数据
+
+function t(key){ return I18N[LANG][key] || key; }
+
+/* ================= 语言切换 ================= */
+function toggleLang(){
+  LANG = LANG === "zh" ? "ar" : "zh";
+  try{ localStorage.setItem("civmsg_lang", LANG); }catch(e){}
+  applyLang();
+}
+function applyLang(){
+  const html = document.documentElement;
+  html.setAttribute("data-lang", LANG);
+  html.setAttribute("lang", LANG === "zh" ? "zh-CN" : "ar");
+  html.setAttribute("dir", LANG === "ar" ? "rtl" : "ltr");
+  document.getElementById("langLabel").textContent = LANG === "zh" ? "العربية" : "中文";
+
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(I18N[LANG][k]) el.textContent = I18N[LANG][k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const k = el.getAttribute("data-i18n-ph");
+    if(I18N[LANG][k]) el.setAttribute("placeholder", I18N[LANG][k]);
+  });
+
+  // 重新渲染动态内容
+  if(currentSymbol){
+    // 后端返回内容为切换前语言，清空以回退到双语本地资料，保证语言一致
+    currentProducts = null;
+    currentStory = null;
+    renderNarrative(currentSymbol);
+    renderRec(currentSymbol);
+    renderSuggestChips(currentSymbol);
+    // 更新已识别名称
+    const s = DATA[currentSymbol];
+    document.getElementById("resultName").childNodes[0].nodeValue = s.name[LANG];
+    document.getElementById("resultNameAr").textContent = LANG==="zh" ? s.name.ar : s.name.zh;
+  }
+  // 重置聊天欢迎语（若聊天为空）
+  const cw = document.getElementById("chatWindow");
+  if(cw.dataset.onlyWelcome === "true"){
+    cw.innerHTML = "";
+    addMessage("ai", t("welcome"));
+    cw.dataset.onlyWelcome = "true";
+  }
+
+  // 更新静态页面内容与设置项显示
+  renderCorridor();
+  renderSilkGrid();
+  renderHistory();
+  renderFavorites();
+  renderStats();
+  document.getElementById("settingLangVal").textContent = LANG === "zh" ? "العربية" : "中文";
+  document.getElementById("settingThemeVal").textContent =
+    document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+}
+
+/* ================= 页面切换（底部 Tab + 滑动手势） ================= */
+const PAGE_ORDER = ["home","recognize","qa","silk","profile"];
+let currentPage = "home";
+function switchPage(page, dir){
+  if(page === currentPage){ window.scrollTo({top:0,behavior:"smooth"}); return; }
+  // 滑动方向决定进入动画（RTL 下自动镜像）
+  const rtl = document.documentElement.getAttribute("dir") === "rtl";
+  let fromClass = "";
+  if(dir === "next") fromClass = rtl ? "from-left" : "from-right";
+  else if(dir === "prev") fromClass = rtl ? "from-right" : "from-left";
+
+  currentPage = page;
+  document.querySelectorAll(".page").forEach(p=>{
+    const active = p.dataset.page === page;
+    p.classList.remove("from-left","from-right");
+    if(active && fromClass) p.classList.add(fromClass);
+    p.classList.toggle("active", active);
+  });
+  document.querySelectorAll(".tab").forEach(tb=>{
+    tb.classList.toggle("active", tb.dataset.tab === page);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+  try{ localStorage.setItem("civmsg_page", page); }catch(e){}
+}
+function swipeTo(delta){
+  const idx = PAGE_ORDER.indexOf(currentPage);
+  const nextIdx = idx + delta;
+  if(nextIdx < 0 || nextIdx >= PAGE_ORDER.length) return;
+  switchPage(PAGE_ORDER[nextIdx], delta > 0 ? "next" : "prev");
+}
+
+/* ================= 主题切换 ================= */
+function toggleTheme(){
+  const html = document.documentElement;
+  const dark = html.getAttribute("data-theme") === "dark";
+  const next = dark ? "light" : "dark";
+  html.setAttribute("data-theme", next);
+  const icon = dark ? "🌙" : "☀️";
+  document.getElementById("themeBtn").textContent = icon;
+  const sv = document.getElementById("settingThemeVal");
+  if(sv) sv.textContent = icon;
+  try{ localStorage.setItem("civmsg_theme", next); }catch(e){}
+}
+
+/* ================= 上传 & 识别 ================= */
+const dropzone = document.getElementById("dropzone");
+["dragenter","dragover"].forEach(e=>dropzone.addEventListener(e, ev=>{ev.preventDefault();dropzone.classList.add("dragover");}));
+["dragleave","drop"].forEach(e=>dropzone.addEventListener(e, ev=>{ev.preventDefault();dropzone.classList.remove("dragover");}));
+dropzone.addEventListener("drop", ev=>{
+  const f = ev.dataTransfer.files[0];
+  if(f) handleFile(f);
+});
+
+function handleFile(file){
+  if(!file || !file.type.startsWith("image/")){ showToast("请选择图片文件"); return; }
+  const reader = new FileReader();
+  reader.onload = e => startRecognition(e.target.result, null, file.name);
+  reader.readAsDataURL(file);
+}
+
+// 根据文件名简单猜测（模拟），否则随机
+function guessSymbol(name){
+  const n = (name||"").toLowerCase();
+  if(/porcelain|瓷|blue|青花/.test(n)) return "porcelain";
+  if(/silk|丝|绸/.test(n)) return "silk";
+  if(/calli|书法|arab|خط/.test(n)) return "calligraphy";
+  const keys = Object.keys(DATA);
+  return keys[Math.floor(Math.random()*keys.length)];
+}
+
+function demoRecognize(symbol){
+  const s = DATA[symbol];
+  // 生成一个 SVG 占位缩略图
+  const svg = makePlaceholder(s.icon, s.color);
+  startRecognition(svg, symbol);
+}
+
+function makePlaceholder(icon, color){
+  const colors = color.match(/#[0-9A-Fa-f]{6}/g) || ["#1A3A5C","#C49B5E"];
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>
+    <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+    <stop offset='0' stop-color='${colors[0]}'/><stop offset='1' stop-color='${colors[1]||colors[0]}'/>
+    </linearGradient></defs>
+    <rect width='200' height='200' fill='url(#g)'/>
+    <text x='100' y='125' font-size='90' text-anchor='middle'>${icon}</text></svg>`;
+  return "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
+}
+
+let stepTimer = null;
+function startRecognition(imgSrc, symbol, filename){
+  // 重置显示
+  document.getElementById("resultBox").classList.remove("show");
+  document.getElementById("narrativeBlock").classList.remove("show");
+  document.getElementById("loadingBox").classList.add("show");
+  document.getElementById("scanner").querySelector("img")?.remove();
+  const img = document.createElement("img");
+  img.src = imgSrc;
+  document.getElementById("scanner").prepend(img);
+  showToast(t("uploadTip"));
+
+  // 加载步骤文字
+  const steps = t("scanStep");
+  let i = 0;
+  const stepEl = document.getElementById("loadingSteps");
+  stepEl.textContent = steps[0];
+  clearInterval(stepTimer);
+  stepTimer = setInterval(()=>{ i=(i+1)%steps.length; stepEl.textContent = steps[i]; }, 550);
+
+  // 调用后端 /api/recognize；失败则回退到本地模拟数据
+  const body = symbol ? { symbol, lang: LANG } : { filename: filename || "", lang: LANG };
+  const timeout = new Promise(r=>setTimeout(()=>r(null), 2000));
+  const req = fetch(API_BASE + "/api/recognize", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  }).then(res=>res.ok ? res.json() : null).catch(()=>null);
+
+  Promise.race([req, timeout]).then(data=>{
+    // 若 timeout 先返回，再给真实请求一点时间也无妨；直接以 data 为准
+    setTimeout(()=>{
+      clearInterval(stepTimer);
+      document.getElementById("loadingBox").classList.remove("show");
+      if(data && data.symbol){
+        // 在线：采用后端结果
+        currentProducts = data.products || null;
+        currentStory = data.story || null;
+        showResult(data.symbol, imgSrc);
+      } else {
+        // 离线回退
+        currentProducts = null;
+        currentStory = null;
+        showResult(symbol || guessSymbol(filename||""), imgSrc);
+      }
+    }, 400);
+  });
+}
+
+function showResult(symbol, imgSrc){
+  showResultDirect(symbol, imgSrc);
+  // 记录历史 + 统计（仅新识别时）
+  addHistory(symbol, imgSrc);
+}
+
+function showResultDirect(symbol, imgSrc){
+  currentSymbol = symbol;
+  const s = DATA[symbol];
+  document.getElementById("resultThumb").src = imgSrc;
+  const nameEl = document.getElementById("resultName");
+  nameEl.childNodes[0].nodeValue = s.name[LANG];
+  document.getElementById("resultNameAr").textContent = LANG==="zh" ? s.name.ar : s.name.zh;
+
+  document.getElementById("resultBox").classList.add("show");
+  // 置信度动画
+  document.getElementById("confFill").style.width = "0%";
+  document.getElementById("confNum").textContent = "0%";
+  let c = 0;
+  const target = s.confidence;
+  setTimeout(()=>{ document.getElementById("confFill").style.width = target+"%"; },100);
+  const ct = setInterval(()=>{
+    c += 2; if(c>=target){ c=target; clearInterval(ct); }
+    document.getElementById("confNum").textContent = c+"%";
+  }, 24);
+
+  // 渲染叙事、推荐、问答提示
+  renderNarrative(symbol);
+  renderRec(symbol);
+  renderSuggestChips(symbol);
+  document.getElementById("narrativeBlock").classList.add("show");
+
+  setTimeout(()=>document.getElementById("narrativeBlock").scrollIntoView({behavior:"smooth",block:"start"}), 400);
+}
+
+function renderNarrative(symbol){
+  const s = DATA[symbol];
+  const box = document.getElementById("narrativeContent");
+  const sub = document.getElementById("narrativeSub");
+  const nm = s ? s.name[LANG] : symbol;
+  sub.textContent = (LANG==="zh"?"关于「":"حول «") + nm + (LANG==="zh"?"」的 AI 深度解读":" » تفسير عميق");
+
+  let html = "";
+  // 后端返回的整体故事（含丝路关联 + 署名）——置顶精读卡
+  if(currentStory){
+    html += `<div class="story-card story-featured">
+      <h4>🛣️ ${LANG==="zh"?"丝路故事":"قصة طريق الحرير"}</h4>
+      <p>${currentStory}</p>
+    </div>`;
+  }
+  // 三段式深度解读（本地资料）
+  if(s){
+    html += s.narrative[LANG].map((n, idx, arr)=>{
+      // 若无后端故事，则在最后一段结尾补上丝路数字驿站署名
+      const tail = (!currentStory && idx === arr.length-1)
+        ? ` <span class="story-sign">${SIGNATURE[LANG]}</span>` : "";
+      return `<div class="story-card">
+        <h4>${n.icon} ${n.title}</h4>
+        <p>${n.text}${tail}</p>
+      </div>`;
+    }).join("");
+  }
+  box.innerHTML = html;
+}
+
+/* 产品索引：任一语言名称 → 双语条目，用于收藏跨语言本地化 */
+const PRODUCT_INDEX = {};
+(function buildProductIndex(){
+  for(const ok in SILKROAD){
+    for(const item of SILKROAD[ok]){
+      const o = ORIGINS[ok];
+      const entry = { key:item.name.zh, name:item.name, price:item.price,
+                      image:item.image, link:item.link, origin:o, theme:o.theme };
+      PRODUCT_INDEX[item.name.zh] = entry;
+      PRODUCT_INDEX[item.name.ar] = entry;
+    }
+  }
+})();
+
+function renderRec(symbol){
+  const grid = document.getElementById("recGrid");
+  const list = (currentProducts && currentProducts.length) ? currentProducts : matchProducts(symbol, LANG);
+  const buy = LANG==="zh" ? "去购买" : "اشترِ الآن";
+  grid.innerHTML = list.map(r=>{
+    const key = r.name; // 名称作为查找键（含后端返回）
+    const faved = isFaved(key);
+    return `<div class="rec-card">
+      <div class="rec-visual" style="background:var(--blue)">
+        <span class="origin-badge origin-${r.theme}"><span class="pin"></span>${r.origin}</span>
+        <button class="fav-heart ${faved?'on':''}" onclick="event.stopPropagation();toggleFav('${encodeURIComponent(key)}',this)" title="收藏">${faved?'❤️':'🤍'}</button>
+        ${r.image}
+      </div>
+      <div class="rec-body">
+        <h4>${r.name}</h4>
+        <p>${r.origin}</p>
+        <div class="rec-foot">
+          <span class="rec-price">${r.price}</span>
+          <a href="${r.link}" onclick="event.stopPropagation();return false" class="rec-action">${buy}</a>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function renderSuggestChips(symbol){
+  const chips = document.getElementById("suggestChips");
+  const qs = DATA[symbol].questions[LANG];
+  chips.innerHTML = qs.map(q=>`<span class="chip" onclick="askChip('${q.replace(/'/g,"\\'")}')">${q}</span>`).join("");
+}
+
+function resetAll(){
+  document.getElementById("resultBox").classList.remove("show");
+  document.getElementById("narrativeBlock").classList.remove("show");
+  document.getElementById("fileInput").value = "";
+  currentSymbol = null;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ================= 问答 ================= */
+function addMessage(who, text){
+  const cw = document.getElementById("chatWindow");
+  const div = document.createElement("div");
+  div.className = "msg " + who;
+  const label = who==="user" ? (LANG==="zh"?"你":"أنت") : (LANG==="zh"?"AI 助手":"المساعد");
+  div.innerHTML = `<div class="who">${label}</div>${text}`;
+  cw.appendChild(div);
+  cw.scrollTop = cw.scrollHeight;
+  cw.dataset.onlyWelcome = "false";
+}
+
+function askChip(q){
+  document.getElementById("chatInput").value = q;
+  sendMessage();
+}
+
+function sendMessage(){
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if(!text) return;
+  addMessage("user", text);
+  input.value = "";
+  STATS.ask++; renderStats(); saveState();
+
+  // typing
+  const cw = document.getElementById("chatWindow");
+  const typing = document.createElement("div");
+  typing.className = "msg ai typing";
+  typing.innerHTML = "<span></span><span></span><span></span>";
+  cw.appendChild(typing);
+  cw.scrollTop = cw.scrollHeight;
+
+  setTimeout(()=>{
+    typing.remove();
+    addMessage("ai", getAnswer(text));
+  }, 1100);
+}
+
+function getAnswer(q){
+  const bank = AI_ANSWERS[LANG];
+  const lower = q.toLowerCase();
+  for(const item of bank.keywords){
+    if(item.k.some(k=>q.includes(k)||lower.includes(k.toLowerCase()))) return item.a;
+  }
+  // 若已识别符号，加入符号背景
+  if(currentSymbol){
+    const nm = DATA[currentSymbol].name[LANG];
+    const prefix = LANG==="zh" ? `关于「${nm}」——` : `حول «${nm}» — `;
+    return prefix + bank.default;
+  }
+  return bank.default;
+}
+
+/* ================= Toast ================= */
+let toastTimer = null;
+function showToast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove("show"), 2600);
+}
+
+/* ================= 首页：文化走廊数据 & 渲染 ================= */
+const CORRIDOR = {
+  zh: [
+    { icon:"🏯", city:"长安", desc:"丝路东方起点，万国商旅云集的盛世都城。" },
+    { icon:"🏜️", city:"敦煌", desc:"莫高窟壁画，见证多元文明在此交汇生辉。" },
+    { icon:"🕌", city:"撒马尔罕", desc:"中亚枢纽，丝绸与瓷器在此转运西行。" },
+    { icon:"📜", city:"巴格达", desc:"智慧宫译介东西典籍，点亮文明之光。" },
+    { icon:"⛲", city:"大马士革", desc:"古老市集，中国青花与阿拉伯工艺交融。" }
+  ],
+  ar: [
+    { icon:"🏯", city:"تشانغآن", desc:"نقطة انطلاق طريق الحرير شرقاً، عاصمة تجارية مزدهرة." },
+    { icon:"🏜️", city:"دونهوانغ", desc:"جداريات كهوف موقاو، شاهدة على تلاقي الحضارات." },
+    { icon:"🕌", city:"سمرقند", desc:"محور آسيا الوسطى، حيث يُنقل الحرير والخزف غرباً." },
+    { icon:"📜", city:"بغداد", desc:"بيت الحكمة يترجم كتب الشرق والغرب وينير الحضارة." },
+    { icon:"⛲", city:"دمشق", desc:"أسواق عريقة يمتزج فيها الخزف الصيني بالحرف العربية." }
+  ]
+};
+function renderCorridor(){
+  const box = document.getElementById("corridor");
+  if(!box) return;
+  box.innerHTML = CORRIDOR[LANG].map(c=>`
+    <div class="corridor-stop">
+      <div class="corridor-node">${c.icon}</div>
+      <div class="corridor-info"><h4>${c.city}</h4><p>${c.desc}</p></div>
+    </div>`).join("");
+}
+
+/* ================= 丝路页：沿线国家文化符号 ================= */
+const SILK_COUNTRIES = {
+  zh: [
+    { flag:"🇨🇳", icon:"🏺", country:"中国", symbol:"青花瓷 · 丝绸", desc:"釉下彩与织锦，沿丝路远播四方。", theme:"cn", go:"porcelain" },
+    { flag:"🇸🇾", icon:"🕌", country:"叙利亚·大马士革", symbol:"大马士革工艺", desc:"铜器与镶嵌，尽显阿拉伯匠心。", theme:"ar", go:"calligraphy" },
+    { flag:"🇮🇶", icon:"📜", country:"伊拉克·巴格达", symbol:"阿拉伯书法", desc:"智慧宫里的书法与天文之光。", theme:"ar", go:"calligraphy" },
+    { flag:"🇺🇿", icon:"🧣", country:"乌兹别克·撒马尔罕", symbol:"中亚织物", desc:"丝路枢纽的丝巾与陶器。", theme:"ca", go:"silk" },
+    { flag:"🇮🇳", icon:"🧂", country:"印度", symbol:"香料文明", desc:"胡椒与豆蔻，香飘东西两端。", theme:"in", go:"spice" },
+    { flag:"🇪🇬", icon:"🔺", country:"埃及", symbol:"纸莎草 · 金字塔", desc:"尼罗河畔的古老文明印记。", theme:"eg", go:null }
+  ],
+  ar: [
+    { flag:"🇨🇳", icon:"🏺", country:"الصين", symbol:"الخزف · الحرير", desc:"الخزف والديباج ينتشران عبر طريق الحرير.", theme:"cn", go:"porcelain" },
+    { flag:"🇸🇾", icon:"🕌", country:"سوريا · دمشق", symbol:"حرف دمشق", desc:"النحاس والتطعيم يجسدان براعة العرب.", theme:"ar", go:"calligraphy" },
+    { flag:"🇮🇶", icon:"📜", country:"العراق · بغداد", symbol:"الخط العربي", desc:"نور الخط والفلك في بيت الحكمة.", theme:"ar", go:"calligraphy" },
+    { flag:"🇺🇿", icon:"🧣", country:"أوزبكستان · سمرقند", symbol:"منسوجات آسيا الوسطى", desc:"أوشحة وفخار محور طريق الحرير.", theme:"ca", go:"silk" },
+    { flag:"🇮🇳", icon:"🧂", country:"الهند", symbol:"حضارة التوابل", desc:"الفلفل والهيل يعطران الشرق والغرب.", theme:"in", go:"spice" },
+    { flag:"🇪🇬", icon:"🔺", country:"مصر", symbol:"البردي · الأهرامات", desc:"آثار حضارة عريقة على ضفاف النيل.", theme:"eg", go:null }
+  ]
+};
+const THEME_GRAD = {
+  cn:"linear-gradient(135deg,#B22222,#C49B5E)", ar:"linear-gradient(135deg,#1E6B4F,#C49B5E)",
+  ca:"linear-gradient(135deg,#1A3A5C,#C49B5E)", in:"linear-gradient(135deg,#D9752B,#C49B5E)",
+  eg:"linear-gradient(135deg,#B8912F,#E0C87A)"
+};
+function renderSilkGrid(){
+  const grid = document.getElementById("silkGrid");
+  if(!grid) return;
+  const explore = LANG==="zh" ? "去识别 →" : "← تعرّف";
+  grid.innerHTML = SILK_COUNTRIES[LANG].map(c=>`
+    <div class="silk-card" onclick="silkExplore('${c.go||""}')">
+      <div class="silk-banner" style="background:${THEME_GRAD[c.theme]}">
+        ${c.icon}<span class="country-flag">${c.flag}</span>
+      </div>
+      <div class="silk-body">
+        <div class="silk-country" style="color:var(--gold-dark)">${c.country}</div>
+        <h4>${c.symbol}</h4>
+        <p>${c.desc}</p>
+        ${c.go?`<p style="margin-top:8px;color:var(--gold-dark);font-weight:700">${explore}</p>`:""}
+      </div>
+    </div>`).join("");
+}
+function silkExplore(sym){
+  if(sym){
+    switchPage("recognize");
+    setTimeout(()=>demoRecognize(sym), 300);
+  } else {
+    showToast(LANG==="zh"?"更多文化符号识别即将上线 ✨":"المزيد من الرموز قريباً ✨");
+  }
+}
+
+/* ================= 我的页面：统计 + 历史 + 收藏（localStorage 持久化） ================= */
+const LS_KEY = "civmsg_state_v1";
+let STATS = { scan:0, ask:0, fav:0 };
+let HISTORY = [];
+let FAVORITES = [];   // 存 { key, origin({zh,ar}), theme } 等跨语言字段
+
+function saveState(){
+  try{
+    localStorage.setItem(LS_KEY, JSON.stringify({ stats: STATS, history: HISTORY, favorites: FAVORITES }));
+  }catch(e){ /* 隐私模式或超额，忽略 */ }
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(data && data.stats) STATS = Object.assign({scan:0,ask:0,fav:0}, data.stats);
+    if(data && Array.isArray(data.history)) HISTORY = data.history;
+    if(data && Array.isArray(data.favorites)) FAVORITES = data.favorites;
+  }catch(e){ /* 数据损坏，忽略 */ }
+}
+
+function renderStats(){
+  document.getElementById("statScan").textContent = STATS.scan;
+  document.getElementById("statAsk").textContent = STATS.ask;
+  document.getElementById("statFav").textContent = FAVORITES.length;
+}
+
+/* ---------- 收藏好物 ---------- */
+function isFaved(nameKey){
+  const e = PRODUCT_INDEX[nameKey];
+  const key = e ? e.key : nameKey;
+  return FAVORITES.some(f=>f.key === key);
+}
+function toggleFav(encodedName, btn){
+  const nameKey = decodeURIComponent(encodedName);
+  const e = PRODUCT_INDEX[nameKey];
+  // 后端返回的商品可能不在索引中，用名称兜底
+  const key = e ? e.key : nameKey;
+  const idx = FAVORITES.findIndex(f=>f.key === key);
+  if(idx >= 0){
+    FAVORITES.splice(idx, 1);
+    if(btn){ btn.classList.remove("on"); btn.textContent = "🤍"; }
+    showToast(LANG==="zh"?"已取消收藏":"أُلغيت من المفضلة");
+  } else {
+    FAVORITES.unshift(e
+      ? { key:e.key, name:e.name, price:e.price, image:e.image, link:e.link, origin:e.origin, theme:e.theme }
+      : { key, name:{zh:nameKey,ar:nameKey}, price:"", image:"🛍️", link:"#", origin:{zh:"",ar:""}, theme:"cn" });
+    if(btn){ btn.classList.add("on"); btn.textContent = "❤️"; }
+    showToast(LANG==="zh"?"已加入收藏 ❤️":"أُضيف للمفضلة ❤️");
+  }
+  STATS.fav = FAVORITES.length;
+  renderStats();
+  renderFavorites();
+  saveState();
+}
+function renderFavorites(){
+  const grid = document.getElementById("favGrid");
+  if(!grid) return;
+  if(!FAVORITES.length){
+    grid.innerHTML = `<div class="history-empty">${t("favEmpty")}</div>`;
+    return;
+  }
+  const buy = LANG==="zh" ? "去购买" : "اشترِ الآن";
+  grid.innerHTML = FAVORITES.map(f=>{
+    const name = (f.name && (f.name[LANG]||f.name.zh)) || f.key;
+    const origin = (f.origin && (f.origin[LANG]||f.origin.zh)) || "";
+    return `<div class="rec-card">
+      <div class="rec-visual" style="background:var(--blue)">
+        ${origin?`<span class="origin-badge origin-${f.theme}"><span class="pin"></span>${origin}</span>`:""}
+        <button class="fav-heart on" onclick="toggleFav('${encodeURIComponent(f.key)}',this)" title="取消收藏">❤️</button>
+        ${f.image}
+      </div>
+      <div class="rec-body">
+        <h4>${name}</h4>
+        <p>${origin}</p>
+        <div class="rec-foot">
+          <span class="rec-price">${f.price||""}</span>
+          <a href="${f.link||'#'}" onclick="event.stopPropagation();return false" class="rec-action">${buy}</a>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+function clearFavorites(){
+  FAVORITES = [];
+  STATS.fav = 0;
+  saveState();
+  renderStats();
+  renderFavorites();
+  // 同步识别页里已渲染的心形按钮
+  if(currentSymbol) renderRec(currentSymbol);
+  showToast(LANG==="zh"?"已清空收藏":"تم مسح المفضلة");
+}
+
+/* ---------- 识别历史 ---------- */
+function addHistory(symbol, imgSrc){
+  STATS.scan++;
+  const s = DATA[symbol];
+  // 存 symbol（跨语言）+ 时间戳，名称在渲染时按当前语言实时生成
+  HISTORY.unshift({ name: s ? s.name[LANG] : symbol, symbol, img: imgSrc, ts: Date.now() });
+  if(HISTORY.length > 8) HISTORY.pop();
+  renderStats();
+  renderHistory();
+  saveState();
+}
+function timeAgo(ts){
+  if(!ts) return t("justNow");
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if(diff < 60) return t("justNow");
+  if(diff < 3600) return Math.floor(diff/60) + (LANG==="zh"?" 分钟前":" د");
+  if(diff < 86400) return Math.floor(diff/3600) + (LANG==="zh"?" 小时前":" س");
+  return Math.floor(diff/86400) + (LANG==="zh"?" 天前":" ي");
+}
+function renderHistory(){
+  const box = document.getElementById("historyList");
+  if(!box) return;
+  if(!HISTORY.length){
+    box.innerHTML = `<div class="history-empty">${t("historyEmpty")}</div>`;
+    return;
+  }
+  box.innerHTML = HISTORY.map((h,i)=>{
+    const s = DATA[h.symbol];
+    const name = s ? s.name[LANG] : h.name;
+    return `<div class="history-item" onclick="reviewHistory(${i})" title="${t('reviewTip')}">
+      <img class="h-thumb" src="${h.img}" alt="">
+      <div class="h-info"><h5>${name}</h5><span>${timeAgo(h.ts)}</span></div>
+      <span class="h-arrow">›</span>
+    </div>`;
+  }).join("");
+}
+function reviewHistory(i){
+  const h = HISTORY[i];
+  if(!h) return;
+  // 跳到识别页并重放该识别结果（复用离线本地资料）
+  currentProducts = null;
+  currentStory = null;
+  switchPage("recognize");
+  setTimeout(()=>{
+    showResultDirect(h.symbol, h.img);
+  }, 320);
+}
+function clearHistory(){
+  HISTORY = [];
+  STATS.scan = 0;
+  saveState();
+  renderStats();
+  renderHistory();
+  showToast(LANG==="zh"?"已清空历史记录":"تم مسح السجل");
+}
+
+/* ================= 滑动手势（左右切换页面） ================= */
+(function initSwipe(){
+  let startX = 0, startY = 0, tracking = false;
+  const main = document.querySelector("main");
+  main.addEventListener("touchstart", e=>{
+    if(e.touches.length !== 1){ tracking = false; return; }
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    tracking = true;
+  }, {passive:true});
+  main.addEventListener("touchend", e=>{
+    if(!tracking) return;
+    tracking = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    // 需水平位移足够大、且明显大于竖直位移，避免与滚动/聊天冲突
+    if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+    // 屏幕上向左滑（dx<0）= 下一页；向右滑 = 上一页
+    swipeTo(dx < 0 ? 1 : -1);
+  }, {passive:true});
+})();
+
+/* ================= 初始化 ================= */
+(function init(){
+  // 载入用户偏好（主题 / 语言）
+  try{
+    const savedTheme = localStorage.getItem("civmsg_theme");
+    if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+    document.getElementById("themeBtn").textContent =
+      savedTheme === "dark" ? "☀️" : "🌙";
+    const savedLang = localStorage.getItem("civmsg_lang");
+    if(savedLang === "zh" || savedLang === "ar") LANG = savedLang;
+  }catch(e){}
+
+  // 载入持久化的统计与历史
+  loadState();
+
+  applyLang();
+  renderCorridor();
+  renderSilkGrid();
+  renderStats();
+  renderHistory();
+  renderFavorites();
+
+  // 恢复上次停留的页面
+  try{
+    const savedPage = localStorage.getItem("civmsg_page");
+    if(savedPage && PAGE_ORDER.includes(savedPage) && savedPage !== "home"){
+      switchPage(savedPage);
+    }
+  }catch(e){}
+
+  const cw = document.getElementById("chatWindow");
+  addMessage("ai", t("welcome"));
+  cw.dataset.onlyWelcome = "true";
+})();
+</script>
+</body>
+</html>

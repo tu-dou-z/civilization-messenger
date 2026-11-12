@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>文明信使 · 一带一路丝绸之路（白金版）</title>
+<style>
+  html,body{margin:0;padding:0;background:#EFE4CC;}
+  #wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+  svg{width:min(98vw,1800px);height:auto;display:block;}
+</style>
+</head>
+<body>
+<div id="wrap">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" width="1672" height="941">
+  <defs>
+    <clipPath id="frame"><rect x="0" y="0" width="1672" height="941"/></clipPath>
+
+    <!-- 白金版的金：比米金版再深一档，靠暖棕金压住浅底 -->
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#D6AF6C"/>
+      <stop offset="0.34" stop-color="#BD944F"/>
+      <stop offset="0.66" stop-color="#A57B38"/>
+      <stop offset="1"   stop-color="#8A6128"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B4894A"/>
+      <stop offset="1" stop-color="#7E5822"/>
+    </linearGradient>
+    <linearGradient id="goldLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#C9A55E" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#A8813D" stop-opacity="0.9"/>
+      <stop offset="1"   stop-color="#C9A55E" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 标题区极轻的暖白提亮，把文字从纹样里托出来 -->
+    <radialGradient id="lift" cx="0.5" cy="0.46" r="0.52">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="letterPress" x="-20%" y="-40%" width="140%" height="180%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.4" flood-color="#FFFFFF" flood-opacity="0.95"/>
+      <feDropShadow dx="0" dy="-1.6" stdDeviation="2.2" flood-color="#6E4A16" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <image href="poster_flat_base_white_16x9.png" x="0" y="0" width="1672" height="941" preserveAspectRatio="none"/>
+
+    <rect x="150" y="90" width="1372" height="600" fill="url(#lift)"/>
+
+    <line x1="340" y1="318" x2="1332" y2="318" stroke="url(#goldLine)" stroke-width="1.1" opacity="0.85"/>
+
+    <!-- 主标题 -->
+    <g font-family="'Source Han Serif SC','Noto Serif SC','Songti SC',STSong,'SimSun',serif">
+      <text x="836" y="284" text-anchor="middle" font-size="24" font-weight="500"
+            letter-spacing="15" fill="#9C7534" opacity="0.9">THE SILK ROAD · 一带一路</text>
+      <text x="836" y="482" text-anchor="middle" font-size="162" font-weight="900"
+            letter-spacing="26" fill="url(#gold)" filter="url(#letterPress)">文明信使</text>
+    </g>
+
+    <!-- 分隔 -->
+    <g>
+      <path d="M836 510 l14 16 -14 16 -14 -16 z" fill="url(#goldDark)"/>
+      <line x1="688" y1="526" x2="792" y2="526" stroke="url(#goldLine)" stroke-width="1.6"/>
+      <line x1="880" y1="526" x2="984" y2="526" stroke="url(#goldLine)" stroke-width="1.6"/>
+      <circle cx="680" cy="526" r="3" fill="#A8813D"/>
+      <circle cx="992" cy="526" r="3" fill="#A8813D"/>
+    </g>
+
+    <!-- 副标题 -->
+    <g font-family="'Source Han Serif SC','Noto Serif SC','Songti SC',STSong,'SimSun',serif">
+      <text x="836" y="592" text-anchor="middle" font-size="46" font-weight="600"
+            letter-spacing="9" fill="url(#goldDark)">文明因交流而多彩，文化因互鉴而丰富</text>
+    </g>
+
+    <line x1="430" y1="640" x2="1242" y2="640" stroke="url(#goldLine)" stroke-width="1" opacity="0.75"/>
+  </g>
+</svg>
+</div>
+</body>
+</html>

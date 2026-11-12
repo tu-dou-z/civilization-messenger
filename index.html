@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文明信使 · 中阿数字文化交流平台</title>
+<link rel="stylesheet" href="vendor/swiper-bundle.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="cover-open">
+
+<!-- ============ 首屏封面 ============ -->
+
+<!-- ---------- 夜蓝金版：深色主题 ---------- -->
+<div id="cover-dark" class="cover-screen">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" role="img" aria-label="文明信使 · 一带一路封面（夜蓝金）">
+    <defs>
+      <clipPath id="n-frame"><rect x="0" y="0" width="1672" height="941"/></clipPath>
+
+      <linearGradient id="n-gold" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0"   stop-color="#FFF0C6"/>
+        <stop offset="0.30" stop-color="#F0D290"/>
+        <stop offset="0.62" stop-color="#DDB667"/>
+        <stop offset="1"   stop-color="#C09343"/>
+      </linearGradient>
+      <linearGradient id="n-goldSoft" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F4DCA4"/>
+        <stop offset="1" stop-color="#C89A4D"/>
+      </linearGradient>
+      <linearGradient id="n-goldLine" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0"   stop-color="#E0B96A" stop-opacity="0"/>
+        <stop offset="0.5" stop-color="#E8C784" stop-opacity="0.95"/>
+        <stop offset="1"   stop-color="#E0B96A" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- 标题下方极淡的暗部，稳住字的下缘 -->
+      <radialGradient id="n-hold" cx="0.5" cy="0.44" r="0.55">
+        <stop offset="0" stop-color="#03080F" stop-opacity="0.55"/>
+        <stop offset="1" stop-color="#03080F" stop-opacity="0"/>
+      </radialGradient>
+
+      <filter id="n-halo" x="-30%" y="-40%" width="160%" height="180%">
+        <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#E0B96A" flood-opacity="0.28"/>
+      </filter>
+    </defs>
+
+    <g clip-path="url(#n-frame)">
+      <image href="素材/poster_flat_base_navy_gold_16x9.png" x="0" y="0" width="1672" height="941" preserveAspectRatio="none"/>
+
+      <rect x="180" y="120" width="1312" height="560" fill="url(#n-hold)"/>
+
+      <!-- 顶部细金线 -->
+      <line x1="350" y1="318" x2="1322" y2="318" stroke="url(#n-goldLine)" stroke-width="1.1" opacity="0.8"/>
+
+      <!-- 主标题 -->
+      <g font-family="'Source Han Serif SC','Noto Serif SC','Songti SC',STSong,'SimSun',serif">
+        <text x="836" y="282" text-anchor="middle" font-size="24" font-weight="500"
+              letter-spacing="15" fill="#CBAA6F" opacity="0.85">THE SILK ROAD · 一带一路</text>
+        <text x="836" y="478" text-anchor="middle" font-size="162" font-weight="900"
+              letter-spacing="26" fill="url(#n-gold)" filter="url(#n-halo)">文明信使</text>
+      </g>
+
+      <!-- 分隔 -->
+      <g>
+        <path d="M836 506 l14 16 -14 16 -14 -16 z" fill="#E0B96A"/>
+        <line x1="688" y1="522" x2="792" y2="522" stroke="url(#n-goldLine)" stroke-width="1.6"/>
+        <line x1="880" y1="522" x2="984" y2="522" stroke="url(#n-goldLine)" stroke-width="1.6"/>
+        <circle cx="680" cy="522" r="3" fill="#E0B96A"/>
+        <circle cx="992" cy="522" r="3" fill="#E0B96A"/>
+      </g>
+
+      <!-- 副标题 -->
+      <g font-family="'Source Han Serif SC','Noto Serif SC','Songti SC',STSong,'SimSun',serif">
+        <text x="836" y="588" text-anchor="middle" font-size="46" font-weight="600"
+              letter-spacing="9" fill="url(#n-goldSoft)">文明因交流而多彩，文化因互鉴而丰富</text>
+      </g>
+
+      <line x1="430" y1="636" x2="1242" y2="636" stroke="url(#n-goldLine)" stroke-width="1" opacity="0.7"/>
+    </g>
+  </svg>
+
+  <div class="enter-btn" onclick="enterWebsite()" style="cursor:pointer; font-size:1.5rem; display:flex; align-items:center; justify-content:center; gap:8px; position:absolute; bottom:10%; width:100%; z-index:10000; color:#E8C784;">点击进入 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+</div>
+
+<!-- ---------- 白金版：浅色主题 ---------- -->
+<div id="cover-light" class="cover-screen">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" role="img" aria-label="文明信使 · 一带一路封面（白金）">
+    <defs>
+      <clipPath id="cv-frame"><rect x="0" y="0" width="1672" height="941"/></clipPath>
+
+      <!-- 白金版的金：比米金版再深一档，靠暖棕金压住浅底 -->
+      <linearGradient id="cv-gold" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0"   stop-color="#D6AF6C"/>
+        <stop offset="0.34" stop-color="#BD944F"/>
+        <stop offset="0.66" stop-color="#A57B38"/>
+        <stop offset="1"   stop-color="#8A6128"/>
+      </linearGradient>
+      <linearGradient id="cv-goldDark" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#B4894A"/>
+        <stop offset="1" stop-color="#7E5822"/>
+      </linearGradient>
+      <linearGradient id="cv-goldLine" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0"   stop-color="#C9A55E" stop-opacity="0"/>
+        <stop offset="0.5" stop-color="#A8813D" stop-opacity="0.9"/>
+        <stop offset="1"   stop-color="#C9A55E" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- 标题区极轻的暖白提亮，把文字从纹样里托出来 -->
+      <radialGradient id="cv-lift" cx="0.5" cy="0.46" r="0.52">
+        <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/>
+        <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+      </radialGradient>
+
+      <filter id="cv-letterPress" x="-20%" y="-40%" width="140%" height="180%">
+        <feDropShadow dx="0" dy="2.5" stdDeviation="2.4" flood-color="#FFFFFF" flood-opacity="0.95"/>
+        <feDropShadow dx="0" dy="-1.6" stdDeviation="2.2" flood-color="#6E4A16" flood-opacity="0.22"/>
+      </filter>
+    </defs>
+
+    <g clip-path="url(#cv-frame)">
+      <image href="poster_flat_base_white_16x9.png" x="0" y="0" width="1672" height="941" preserveAspectRatio="none"/>
+
+      <rect x="150" y="90" width="1372" height="600" fill="url(#cv-lift)"/>
+
+      <line x1="340" y1="318" x2="1332" y2="318" stroke="url(#cv-goldLine)" stroke-width="1.1" opacity="0.85"/>
+
+      <!-- 主标题 -->
+      <g font-family="'Source Han Serif SC','Noto Serif SC','Songti SC',STSong,'SimSun',serif">
+        <text x="836" y="284" text-anchor="middle" font-size="24" font-weight="500"
+              letter-spacing="15" fill="#9C7534" opacity="0.9">THE SILK ROAD · 一带一路</text>
+        <text x="836" y="482" text-anchor="middle" font-size="162" font-weight="900"
+              letter-spacing="26" fill="url(#cv-gold)" filter="url(#cv-letterPress)">文明信使</text>
+      </g>
+
+      <!-- 分隔 -->
+      <g>
+        <path d="M836 510 l14 16 -14 16 -14 -16 z" fill="url(#cv-goldDark)"/>
+        <line x1="688" y1="526" x2="792" y2="526" stroke="url(#cv-goldLine)" stroke-width="1.6"/>
+        <line x1="880" y1="526" x2="984" y2="526" stroke="url(#cv-goldLine)" stroke-width="1.6"/>
+        <circle cx="680" cy="526" r="3" fill="#A8813D"/>
+        <circle cx="992" cy="526" r="3" fill="#A8813D"/>
+      </g>
+
+      <!-- 副标题 -->
+      <g font-family="'Source Han Serif SC','Noto Serif SC','Songti SC',STSong,'SimSun',serif">
+        <text x="836" y="592" text-anchor="middle" font-size="46" font-weight="600"
+              letter-spacing="9" fill="url(#cv-goldDark)">文明因交流而多彩，文化因互鉴而丰富</text>
+      </g>
+
+      <line x1="430" y1="640" x2="1242" y2="640" stroke="url(#cv-goldLine)" stroke-width="1" opacity="0.75"/>
+    </g>
+  </svg>
+
+  <div class="enter-btn" onclick="enterWebsite()" style="cursor:pointer; font-size:1.5rem; display:flex; align-items:center; justify-content:center; gap:8px; position:absolute; bottom:10%; width:100%; z-index:10000; color:#A57B38;">点击进入 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+</div>
+
+<!-- ============ 导航 ============ -->
+<header>
+  <nav class="nav">
+    <div class="logo" onclick="switchPage('home')">
+      <span class="crescent">☪</span>
+      <span class="brand-txt" data-i18n="brand">文明信使</span>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="langBtn" onclick="toggleLang()">
+        <span id="langLabel">العربية</span>
+      </button>
+      <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="切换主题">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- ==================== 首页 ==================== -->
+  <section class="page active" id="page-home" data-page="home">
+    <div class="hero">
+      <div class="hero-inner">
+        <h1 data-i18n="heroTitle">让文明的符号跨越山海对话</h1>
+        <p data-i18n="heroSub">上传一张文化符号图片，AI 为你解读它的历史渊源、工艺演变，以及中华文明与阿拉伯世界交流的动人故事。</p>
+      </div>
+    </div>
+
+    <!-- 快速入口 -->
+    <div class="quick-grid">
+      <div class="quick-card" onclick="switchPage('recognize')">
+        <span class="q-icon">📷</span>
+        <h4 data-i18n="quickRecognize">开始识别</h4>
+        <p data-i18n="quickRecognizeSub">上传图片，AI 解读文化符号</p>
+      </div>
+      <div class="quick-card" onclick="switchPage('qa')">
+        <span class="q-icon">💬</span>
+        <h4 data-i18n="quickQa">智能问答</h4>
+        <p data-i18n="quickQaSub">追问文化符号背后的故事</p>
+      </div>
+      <div class="quick-card" onclick="switchPage('silk')">
+        <span class="q-icon">🛣️</span>
+        <h4 data-i18n="quickSilk">丝路走廊</h4>
+        <p data-i18n="quickSilkSub">游览沿线国家的文化瑰宝</p>
+      </div>
+    </div>
+
+    <!-- 一带一路文化走廊 -->
+    <div class="glass corridor-block">
+      <div class="section-title"><span class="dot"></span><span data-i18n="corridorTitle">一带一路 · 文化走廊</span></div>
+      <div class="section-sub" data-i18n="corridorSub">一条商路，串起东西方文明的千年对话</div>
+      <!-- 数字古地图 -->
+      <div class="silk-map" id="silkMap">
+        <!-- 底衬：真实地形影像（NASA Blue Marble 地形阴影，按同一墨卡托投影铺满） -->
+        <div class="map-terrain" aria-hidden="true"></div>
+        <!-- 纸纹 / 几何回纹 -->
+        <div class="map-motifs" id="mapMotifs" aria-hidden="true"></div>
+        <svg class="silk-map-svg" id="geoMap" viewBox="0 0 1000 370" preserveAspectRatio="xMidYMid meet"
+             role="img" aria-label="丝绸之路地理路线图">
+          <defs>
+            <linearGradient id="ribbonGrad" gradientUnits="userSpaceOnUse" x1="911" y1="209" x2="113" y2="220">
+              <stop offset="0" stop-color="#E9B45A"/>
+              <stop offset="0.45" stop-color="#CE7A3A"/>
+              <stop offset="1" stop-color="#9E3B2A"/>
+            </linearGradient>
+            <radialGradient id="caravanGrad">
+              <stop offset="0" stop-color="#FFF6D8"/>
+              <stop offset="0.45" stop-color="#F2C46B" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="#F2C46B" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="ribbonGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="1.2" stdDeviation="1.6" flood-color="#5A3A12" flood-opacity="0.45"/>
+            </filter>
+            <pattern id="hatchSea" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <path d="M0 0V9" stroke="currentColor" stroke-width="0.6" opacity="0.28"/>
+            </pattern>
+          </defs>
+
+          <!-- 经纬网 -->
+          <g class="geo-graticule" id="geoGraticule"></g>
+          <!-- 海：底纹 + 陆块剪影 -->
+          <g class="geo-sea" id="geoSea"></g>
+          <!-- 陆地按国家填色（真实国界） -->
+          <g class="geo-countries" id="geoCountries"></g>
+          <!-- 湖泊 / 河流 -->
+          <g class="geo-water" id="geoLakes"></g>
+          <g class="geo-rivers" id="geoRivers"></g>
+          <!-- 国界勾边 -->
+          <g class="geo-borders" id="geoBorders"></g>
+          <!-- 国名注记 -->
+          <g class="geo-labels" id="geoLabels"></g>
+
+          <!-- 商路：阴影 / 虚线底 / 丝带 / 流光 / 联动进度 / 途经点 -->
+          <g class="geo-route">
+            <path class="route-shadow" id="routeShadow"/>
+            <path class="route-base" id="routeBase"/>
+            <path class="route-ribbon" id="routeRibbon" pathLength="1000"/>
+            <path class="route-flow" id="routeFlow" pathLength="1000"/>
+            <path class="route-progress" id="routeProgress" pathLength="1000"/>
+            <g class="route-stops" id="routeStops"></g>
+          </g>
+          <g class="caravan" id="caravan">
+            <circle r="20" fill="url(#caravanGrad)"/>
+            <circle r="4.5" class="caravan-core"/>
+          </g>
+
+          <!-- 罗盘与比例尺 -->
+          <g class="compass" transform="translate(946 52)">
+            <circle r="30" class="compass-face"/>
+            <circle r="30" class="compass-ring"/>
+            <circle r="22" class="compass-thin"/>
+            <path d="M0 -34 L5.4 -4 L0 10 L-5.4 -4 Z" class="compass-n"/>
+            <path d="M0 34 L5.4 4 L0 -10 L-5.4 4 Z" class="compass-s"/>
+            <path d="M-34 0 L-4 5.4 L10 0 L-4 -5.4 Z" class="compass-e"/>
+            <path d="M34 0 L4 5.4 L-10 0 L4 -5.4 Z" class="compass-w"/>
+            <circle r="2.6" class="compass-pin"/>
+            <text y="-40" text-anchor="middle" class="compass-txt">N</text>
+          </g>
+          <g class="map-scale" id="mapScale" transform="translate(742 344)"></g>
+        </svg>
+        <div class="map-cartouche" id="mapCartouche"></div>
+        <div class="map-regions" id="mapRegions"></div>
+        <div class="map-markers" id="mapMarkers"></div>
+        <div class="map-legend" id="mapLegend"></div>
+      </div>
+
+      <!-- 驿站卡片轮播 -->
+      <div class="corridor-carousel">
+        <button class="cs-nav cs-prev" id="csPrev" type="button" aria-label="prev"></button>
+        <div class="swiper corridor-swiper" id="corridorSwiper">
+          <div class="swiper-wrapper" id="corridorSlides"></div>
+        </div>
+        <button class="cs-nav cs-next" id="csNext" type="button" aria-label="next"></button>
+      </div>
+      <div class="corridor-hint" id="corridorHint"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 识别页 ==================== -->
+  <section class="page" id="page-recognize" data-page="recognize">
+    <div class="glass upload-block">
+      <img src="./images/mascot.png" class="mascot-img" alt="mascot">
+      <div class="section-title"><span class="dot"></span><span data-i18n="uploadTitle">文化符号智能识别</span></div>
+      <div class="section-sub" data-i18n="uploadSub">支持青花瓷、丝绸、阿拉伯生活美学等文化符号的 AI 识别</div>
+
+      <!-- 拖拽上传 -->
+      <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+        <div class="up-icon">🏺</div>
+        <h3 data-i18n="dropTitle">点击或拖拽图片到此处</h3>
+        <p data-i18n="dropDesc">或直接选择下方示例快速体验</p>
+        <div class="formats">
+          <span class="tag" onclick="event.stopPropagation();demoRecognize('porcelain')" data-i18n="demoPorcelain">🔵 青花瓷</span>
+          <span class="tag" onclick="event.stopPropagation();demoRecognize('silk')" data-i18n="demoSilk">🧵 丝绸</span>
+          <span class="tag" onclick="event.stopPropagation();demoRecognize('calligraphy')" data-i18n="demoCalligraphy">✒️ 阿拉伯生活美学</span>
+        </div>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])">
+
+      <!-- 加载 -->
+      <div class="loading-box" id="loadingBox">
+        <div class="scanner" id="scanner">
+          <div class="scan-line"></div>
+        </div>
+        <div class="spinner"></div>
+        <p data-i18n="analyzing">AI 正在识别文化符号…</p>
+        <div class="loading-steps" id="loadingSteps"></div>
+      </div>
+
+      <!-- 结果 -->
+      <div class="result-box" id="resultBox">
+        <div class="result-head">
+          <img class="result-thumb" id="resultThumb" alt="识别图">
+          <div class="result-info">
+            <div class="label" data-i18n="recognized">识别结果</div>
+            <h2 id="resultName">—<span class="ar-name" id="resultNameAr"></span></h2>
+            <div class="confidence">
+              <span data-i18n="confidence">置信度</span>
+              <div class="conf-bar"><div class="conf-fill" id="confFill"></div></div>
+              <span class="conf-num" id="confNum">0%</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-ghost reset-btn" onclick="resetAll()">
+          <span>↺</span><span data-i18n="reset">重新识别</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- AI 叙事区 -->
+    <div class="glass narrative-block" id="narrativeBlock">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span data-i18n="narrativeTitle">深度文化叙事</span>
+        <span class="ai-badge">✦ AI</span>
+      </div>
+      <div class="section-sub" id="narrativeSub" data-i18n="narrativeSub">由 AI 生成的文化符号深度解读</div>
+      <div class="narrative-content" id="narrativeContent"></div>
+    </div>
+
+    <!-- 丝路好物推荐区：识别成功后才显示（初始隐藏） -->
+    <div class="recommend-block" id="recSection" style="display:none;">
+      <div class="section-title"><span class="dot"></span><span data-i18n="recTitle">🛣️ 丝路好物 · 从长安到巴格达</span></div>
+      <div class="section-sub" data-i18n="recSub">依识别结果匹配沿途驿站精选，每件好物都标注它的产地</div>
+      <div class="card-grid" id="recGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 问答页 ==================== -->
+  <section class="page" id="page-qa" data-page="qa">
+    <div class="glass qa-block">
+      <img src="./images/mascot.png" class="mascot-img" alt="mascot">
+      <div class="section-title">
+        <span class="dot"></span>
+        <span data-i18n="qaTitle">智能文化问答</span>
+        <span class="ai-badge">✦ AI</span>
+      </div>
+      <div class="section-sub" data-i18n="qaSub">向 AI 提问，深入了解文化符号背后的故事</div>
+
+      <div class="chat-window" id="chatWindow"></div>
+
+      <div class="suggest-chips" id="suggestChips"></div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" data-i18n-ph="chatPlaceholder" placeholder="输入你的问题，例如：这个纹样有什么含义？" onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="send-btn" onclick="sendMessage()" data-i18n="send">发送</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 丝路页 ==================== -->
+  <section class="page" id="page-silk" data-page="silk">
+    <div class="section-title"><span class="dot"></span><span data-i18n="silkTitle">🛣️ 一带一路 · 文化符号地图</span></div>
+    <div class="section-sub" data-i18n="silkSub">跨越陆海两端的丝路文明，探索中阿文化交流的璀璨瑰宝</div>
+    <div class="silk-grid" id="silkGrid"></div>
+
+    <!-- 丝路箴言：补满页面下半部，兼作文化注解 -->
+    <div class="silk-epilogue">
+      <div class="epi-motif" aria-hidden="true"></div>
+      <h3 class="epi-title">文明因交流而多彩 · الحضارات تثري بعضها بالتبادل</h3>
+      <p class="epi-sub">从长安的织机到大马士革的铜匠作坊，器物往来之间，技艺与信仰也一同远行。</p>
+      <div class="epi-grid">
+        <div class="epi-item">
+          <span class="epi-icon">🏺</span>
+          <h4>瓷器之路 · طريق الخزف</h4>
+          <p>景德镇的钴料来自波斯，青花纹样则融入了伊斯兰缠枝。一件瓷器，是两地匠人共同的签名。</p>
+        </div>
+        <div class="epi-item">
+          <span class="epi-icon">✒️</span>
+          <h4>书法与纹样 · الخط والزخرفة</h4>
+          <p>阿拉伯生活美学的连笔韵律，与中式纹样的绵延线形遥相呼应，都在纸与瓷上留住了时间。</p>
+        </div>
+        <div class="epi-item">
+          <span class="epi-icon">🧭</span>
+          <h4>星盘与罗盘 · الإسطرلاب والبوصلة</h4>
+          <p>阿拉伯天文学东传，与中国的指南针相遇于海上丝路，共同指向了更远的世界。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 我的页面 ==================== -->
+  <section class="page" id="page-profile" data-page="profile">
+    <div class="glass profile-head">
+      <div class="avatar">☪</div>
+      <div class="profile-meta">
+        <h3 data-i18n="profileName">文明旅行者</h3>
+        <p data-i18n="profileTag">丝路数字驿站 · 会员</p>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="stat-card"><span class="stat-num" id="statScan">0</span><span class="stat-label" data-i18n="statScan">识别次数</span></div>
+      <div class="stat-card"><span class="stat-num" id="statAsk">0</span><span class="stat-label" data-i18n="statAsk">提问次数</span></div>
+      <div class="stat-card"><span class="stat-num" id="statFav">0</span><span class="stat-label" data-i18n="statFav">收藏好物</span></div>
+    </div>
+
+    <div class="glass history-block">
+      <div class="history-head">
+        <div class="section-title"><span class="dot"></span><span data-i18n="historyTitle">识别历史</span></div>
+        <button class="btn-ghost clear-btn" onclick="clearHistory()" data-i18n="clearHistory">清空</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+
+    <div class="glass footprint-block">
+      <div class="history-head">
+        <div class="section-title"><span class="dot"></span><span data-i18n="footprintTitle">浏览足迹</span></div>
+        <button class="btn-ghost clear-btn" onclick="clearFootprints()" data-i18n="clearFootprint">清空</button>
+      </div>
+      <div class="history-list" id="footprintList"></div>
+    </div>
+
+    <div class="glass fav-block">
+      <div class="history-head">
+        <div class="section-title"><span class="dot"></span><span data-i18n="favTitle">收藏好物</span></div>
+        <button class="btn-ghost clear-btn" onclick="clearFavorites()" data-i18n="clearFav">清空</button>
+      </div>
+      <div class="card-grid" id="favGrid"></div>
+    </div>
+
+    <div class="glass settings-block">
+      <div class="section-title"><span class="dot"></span><span data-i18n="settingsTitle">偏好设置</span></div>
+      <div class="setting-row" onclick="toggleTheme()">
+        <span data-i18n="settingTheme">深色 / 浅色主题</span>
+        <span class="setting-val" id="settingThemeVal">🌙</span>
+      </div>
+      <div class="setting-row" onclick="toggleLang()">
+        <span data-i18n="settingLang">语言 Language</span>
+        <span class="setting-val" id="settingLangVal">العربية</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚（各页共享） -->
+  <footer>
+    <div class="footer-slogan" data-i18n="slogan">文明因交流而多彩，文化因互鉴而丰富</div>
+    <div class="footer-newstart" data-i18n="newStart">文明信使 · 让每一次扫描都成为文明对话的新开始</div>
+    <div class="footer-copy">© 2026 文明信使 Civilization Messenger · <span data-i18n="rights">保留所有权利</span></div>
+  </footer>
+</main>
+
+<!-- ==================== 底部 Tab 导航 ==================== -->
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-tab="home" onclick="switchPage('home')">
+    <span class="tab-icon">🏠</span><span class="tab-label" data-i18n="tabHome">首页</span>
+  </button>
+  <button class="tab" data-tab="recognize" onclick="switchPage('recognize')">
+    <span class="tab-icon">📷</span><span class="tab-label" data-i18n="tabRecognize">识别</span>
+  </button>
+  <button class="tab" data-tab="qa" onclick="switchPage('qa')">
+    <span class="tab-icon">💬</span><span class="tab-label" data-i18n="tabQa">问答</span>
+  </button>
+  <button class="tab" data-tab="silk" onclick="switchPage('silk')">
+    <span class="tab-icon">🛣️</span><span class="tab-label" data-i18n="tabSilk">丝路</span>
+  </button>
+  <button class="tab" data-tab="profile" onclick="switchPage('profile')">
+    <span class="tab-icon">👤</span><span class="tab-label" data-i18n="tabProfile">我的</span>
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- 驿站详情弹窗（内容由 script.js 注入） -->
+<div class="city-overlay" id="cityOverlay" aria-hidden="true">
+  <div class="city-dialog" id="cityDialog" role="dialog" aria-modal="true" aria-labelledby="cityTitle"></div>
+</div>
+
+<script src="vendor/swiper-bundle.min.js"></script>
+<script src="mapdata.js"></script>
+<script src="cities.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>

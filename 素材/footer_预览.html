@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>页面底部装饰条 · 预览</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .block{padding:60px 40px 0;text-align:center;}
+  .block h3{margin:0 0 6px;font-size:15px;letter-spacing:3px;font-weight:600;}
+  .block p{margin:0 0 10px;font-size:12px;opacity:.6;letter-spacing:1px;}
+  .light{background:#FAF6EC;color:#8A6128;}
+  .dark{background:#0D1B2E;color:#E0B96A;}
+  /* 底部填充条：宽度 100%，高度自适应，底部对齐 */
+  .footer-band{display:block;width:100%;height:auto;}
+</style>
+</head>
+<body>
+  <div class="block light">
+    <h3>白金版 · 页面底部填充</h3>
+    <p>background: url(footer_camel_white_3x1.png) bottom center / 100% auto no-repeat;</p>
+    <img class="footer-band" src="footer_camel_white_3x1.png" alt="camel footer white">
+  </div>
+
+  <div class="block dark">
+    <h3>夜蓝金版 · 页面底部填充</h3>
+    <p>background: url(footer_camel_navy_gold_3x1.png) bottom center / 100% auto no-repeat;</p>
+    <img class="footer-band" src="footer_camel_navy_gold_3x1.png" alt="camel footer navy">
+  </div>
+</body>
+</html>

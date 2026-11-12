@@ -1,0 +1,4 @@
+flask>=3.0
+requests>=2.31
+# 部署到云平台时用 gunicorn 起服务；Windows 本地装不上也不影响运行
+gunicorn>=21.2; sys_platform != "win32"
